@@ -166,7 +166,7 @@ export default function Dashboard() {
                         'text-gray-400'
                       }`}>{stat.change}</div>
                     </div>
-                  ))}}
+                  ))}
                 </div>
                 
                 {/* Activity Timeline - Apple Style */}
