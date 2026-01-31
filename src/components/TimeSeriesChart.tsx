@@ -14,9 +14,9 @@ export default function TimeSeriesChart() {
 
   const maxValue = 400;
   const minValue = 100;
-  const chartWidth = 700;
-  const chartHeight = 280;
-  const padding = { top: 20, right: 30, bottom: 40, left: 50 };
+  const chartWidth = 1200;  // Full HD optimized
+  const chartHeight = 320;  // Better aspect ratio
+  const padding = { top: 30, right: 40, bottom: 50, left: 60 };
 
   const getX = (index: number) => {
     return padding.left + (index / (months.length - 1)) * (chartWidth - padding.left - padding.right);
@@ -53,8 +53,12 @@ export default function TimeSeriesChart() {
     <div className="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 animate-fade-in">
       <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#00b4b4] mb-4 sm:mb-6 tracking-tight">Time Series Chart</h2>
       
-      <div className="overflow-x-auto -mx-2 px-2">
-        <svg width={chartWidth} height={chartHeight} className="min-w-[600px]">
+      <div className="w-full overflow-hidden">
+        <svg 
+          viewBox={`0 0 ${chartWidth} ${chartHeight}`}
+          className="w-full h-auto"
+          preserveAspectRatio="xMidYMid meet"
+        >
           {/* Gradient definitions */}
           <defs>
             <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">

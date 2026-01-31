@@ -5,37 +5,35 @@ import { Plus } from 'lucide-react';
 
 interface FilterTabProps {
   label: string;
-  subLabel?: string;
   isActive: boolean;
   onClick: () => void;
 }
 
-function FilterTab({ label, subLabel, isActive, onClick }: FilterTabProps) {
+function FilterTab({ label, isActive, onClick }: FilterTabProps) {
   return (
     <button
       onClick={onClick}
-      className={`min-h-[44px] px-4 sm:px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200
+      className={`min-h-[44px] px-5 sm:px-6 py-2.5 rounded-2xl text-sm font-semibold transition-all duration-200
         focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00b4b4] focus-visible:ring-offset-2
         ${isActive
           ? 'bg-[#00b4b4] text-white'
-          : 'bg-gray-100 text-gray-600 hover:bg-gray-200 active:bg-gray-300'
+          : 'bg-gray-200 text-gray-600 hover:bg-gray-300 active:bg-gray-400'
         }`}
     >
-      <div>{label}</div>
-      {subLabel && <div className="text-[11px] sm:text-xs opacity-80 font-medium">{subLabel}</div>}
+      {label}
     </button>
   );
 }
 
 export default function AnalysisFilters() {
-  const [activeFilter, setActiveFilter] = useState('77ton');
+  const [activeFilter, setActiveFilter] = useState('7Days');
   const [activeTab, setActiveTab] = useState('NO.2');
 
   const filters = [
-    { id: 'tin', label: 'Tin', subLabel: 'diff' },
-    { id: '1floor', label: '1 floor', subLabel: 'diff' },
-    { id: '77ton', label: '77ton', subLabel: 'on' },
-    { id: '1motor', label: '1 Motor', subLabel: 'diff' },
+    { id: '1Day', label: '1 Day' },
+    { id: '3Days', label: '3 Days' },
+    { id: '7Days', label: '7 Days' },
+    { id: '1Month', label: '1 Month' },
   ];
 
   const tabs = ['NO.1', 'NO.2', 'NO.3', 'NO.4', 'NO.5', 'NO.6'];
@@ -48,7 +46,6 @@ export default function AnalysisFilters() {
           <FilterTab
             key={filter.id}
             label={filter.label}
-            subLabel={filter.subLabel}
             isActive={activeFilter === filter.id}
             onClick={() => setActiveFilter(filter.id)}
           />
