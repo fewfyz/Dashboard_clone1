@@ -18,15 +18,15 @@ export default function MonitorPage({ onNavigate }: MonitorPageProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen min-h-[100dvh] w-full bg-gradient-to-br from-[#e8f4f4] to-[#d4ebeb] p-2 sm:p-4 lg:p-5 flex flex-col lg:flex-row">
+    <div className="min-h-screen min-h-[100dvh] w-full bg-gradient-to-br from-[#e8f4f4] to-[#d4ebeb] p-1.5 sm:p-2 md:p-3 lg:p-4 xl:p-5 flex flex-col lg:flex-row">
       {/* Mobile Menu Button - Apple Style */}
       <button 
-        className="lg:hidden fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-xl text-gray-800 p-3 rounded-2xl shadow-lg 
+        className="lg:hidden fixed top-3 left-3 z-50 bg-white/80 backdrop-blur-xl text-gray-800 p-2.5 sm:p-3 rounded-xl sm:rounded-2xl shadow-lg 
           border border-white/20 transition-all duration-200 active:scale-95"
         onClick={() => setSidebarOpen(!sidebarOpen)}
         aria-label={sidebarOpen ? 'Close menu' : 'Open menu'}
       >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={sidebarOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
         </svg>
       </button>
@@ -52,27 +52,27 @@ export default function MonitorPage({ onNavigate }: MonitorPageProps) {
       )}
       
       {/* Main Content */}
-      <main className="flex-1 lg:ml-5 flex flex-col overflow-hidden mt-16 lg:mt-0">
+      <main className="flex-1 lg:ml-3 xl:ml-4 2xl:ml-5 flex flex-col overflow-hidden mt-14 sm:mt-16 lg:mt-0">
         {/* Header */}
         <Header />
         
         {/* Monitor Content */}
-        <div className="flex-1 overflow-y-auto px-1 sm:px-2 pb-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5">
+        <div className="flex-1 overflow-y-auto px-0.5 sm:px-1 lg:px-2 pb-4 sm:pb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-3 lg:gap-4 xl:gap-5">
             {/* Left Column */}
-            <div className="flex flex-col gap-4 lg:gap-5">
+            <div className="flex flex-col gap-2 sm:gap-3 lg:gap-4 xl:gap-5">
               {/* Sensor Controls */}
               <SensorControls />
               
               {/* Charts Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 lg:gap-4 xl:gap-5">
                 <MonitoringChart />
                 <EquipmentChart />
               </div>
             </div>
             
             {/* Right Column */}
-            <div className="flex flex-col gap-4 lg:gap-5">
+            <div className="flex flex-col gap-2 sm:gap-3 lg:gap-4 xl:gap-5">
               {/* Location Map */}
               <LocationMap />
               

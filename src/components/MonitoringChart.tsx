@@ -20,46 +20,46 @@ export default function MonitoringChart() {
   const chartHeight = 120;
 
   return (
-    <div className="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 lg:p-6 animate-fade-in">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4 sm:mb-5">
-        <h3 className="text-sm font-semibold text-gray-800 tracking-wide">📊 MONITORING</h3>
-        <div className="flex gap-4 sm:gap-6">
-          <label className="flex items-center gap-2 cursor-pointer min-h-[44px] px-2 -mx-2 rounded-lg hover:bg-gray-50 transition-colors">
+    <div className="glass-card rounded-xl sm:rounded-2xl lg:rounded-3xl p-3 sm:p-4 lg:p-5 xl:p-6 animate-fade-in">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 mb-3 sm:mb-4 lg:mb-5">
+        <h3 className="text-xs sm:text-sm font-semibold text-gray-800 tracking-wide">📊 MONITORING</h3>
+        <div className="flex gap-3 sm:gap-4 lg:gap-6">
+          <label className="flex items-center gap-1.5 sm:gap-2 cursor-pointer min-h-[36px] sm:min-h-[44px] px-1.5 sm:px-2 -mx-1.5 sm:-mx-2 rounded-lg hover:bg-gray-50 transition-colors">
             <input
               type="checkbox"
               checked={showTemp}
               onChange={(e) => setShowTemp(e.target.checked)}
               className="sr-only peer"
             />
-            <div className={`w-3.5 h-3.5 rounded-full transition-all duration-200 shadow-sm
+            <div className={`w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full transition-all duration-200 shadow-sm
               ${showTemp ? 'bg-gradient-to-br from-red-400 to-red-500' : 'bg-gray-300'}`}></div>
-            <span className="text-xs sm:text-sm font-medium text-gray-600">Temp</span>
+            <span className="text-[10px] sm:text-xs lg:text-sm font-medium text-gray-600">Temp</span>
           </label>
-          <label className="flex items-center gap-2 cursor-pointer min-h-[44px] px-2 -mx-2 rounded-lg hover:bg-gray-50 transition-colors">
+          <label className="flex items-center gap-1.5 sm:gap-2 cursor-pointer min-h-[36px] sm:min-h-[44px] px-1.5 sm:px-2 -mx-1.5 sm:-mx-2 rounded-lg hover:bg-gray-50 transition-colors">
             <input
               type="checkbox"
               checked={showWet}
               onChange={(e) => setShowWet(e.target.checked)}
               className="sr-only peer"
             />
-            <div className={`w-3.5 h-3.5 rounded-full transition-all duration-200 shadow-sm
+            <div className={`w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full transition-all duration-200 shadow-sm
               ${showWet ? 'bg-gradient-to-br from-teal-400 to-teal-500' : 'bg-gray-300'}`}></div>
-            <span className="text-xs sm:text-sm font-medium text-gray-600">Wet</span>
+            <span className="text-[10px] sm:text-xs lg:text-sm font-medium text-gray-600">Wet</span>
           </label>
         </div>
       </div>
 
       {/* Chart */}
-      <div className="relative h-36 sm:h-40">
+      <div className="relative h-28 sm:h-32 lg:h-36 xl:h-40">
         {/* Y-axis labels */}
-        <div className="absolute left-0 top-0 bottom-6 w-8 flex flex-col justify-between text-[10px] sm:text-xs font-medium text-gray-400">
+        <div className="absolute left-0 top-0 bottom-5 sm:bottom-6 w-6 sm:w-8 flex flex-col justify-between text-[9px] sm:text-[10px] lg:text-xs font-medium text-gray-400">
           <span>70</span>
           <span>50</span>
           <span>30</span>
         </div>
 
         {/* Chart area */}
-        <div className="ml-8 sm:ml-10 h-full">
+        <div className="ml-6 sm:ml-8 lg:ml-10 h-full">
           <svg className="w-full h-full" viewBox="0 0 300 140" preserveAspectRatio="none">
             {/* Grid lines */}
             <line x1="0" y1="20" x2="300" y2="20" stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4 4" />

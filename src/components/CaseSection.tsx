@@ -42,19 +42,19 @@ export default function CaseSection({ caseNumber, shaftItems, capacitiveItems, b
   };
 
   return (
-    <div className="glass-card p-5 animate-fade-in" style={{ animationDelay: '50ms' }}>
-      <div className="flex items-center justify-between mb-5">
-        <h3 className="text-lg font-semibold text-gray-800 tracking-tight">CASE {caseNumber}</h3>
+    <div className="glass-card p-3 sm:p-4 lg:p-5 xl:p-6 animate-fade-in" style={{ animationDelay: '50ms' }}>
+      <div className="flex items-center justify-between mb-3 sm:mb-4 lg:mb-5">
+        <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-800 tracking-tight">CASE {caseNumber}</h3>
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5">
         {sections.map((section) => (
           <div key={section.key}>
-            <div className="flex items-center gap-2.5 mb-3">
-              <div className={`w-2.5 h-2.5 ${section.color} rounded-full shadow-sm`}></div>
-              <span className="font-semibold text-gray-700 text-sm">{section.label}</span>
+            <div className="flex items-center gap-2 sm:gap-2.5 mb-2 sm:mb-3">
+              <div className={`w-2 h-2 sm:w-2.5 sm:h-2.5 ${section.color} rounded-full shadow-sm`}></div>
+              <span className="font-semibold text-gray-700 text-xs sm:text-sm">{section.label}</span>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
               {itemsMap[section.key as keyof typeof itemsMap].map((item) => (
                 <ItemCard
                   key={item.id}
@@ -70,13 +70,13 @@ export default function CaseSection({ caseNumber, shaftItems, capacitiveItems, b
       </div>
       
       {/* Pagination Dots */}
-      <div className="flex justify-center gap-2 mt-5">
+      <div className="flex justify-center gap-1.5 sm:gap-2 mt-3 sm:mt-4 lg:mt-5">
         {[0, 1, 2].map((dot) => (
           <button
             key={dot}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+            className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ${
               dot === 0 
-                ? 'bg-[#00b4b4] w-6' 
+                ? 'bg-[#00b4b4] w-4 sm:w-6' 
                 : 'bg-gray-300 hover:bg-gray-400'
             }`}
             aria-label={`Page ${dot + 1}`}

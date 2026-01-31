@@ -336,27 +336,57 @@ body {
    ================== */
 @media (max-width: 374px) {
   /* iPhone SE */
-  html { font-size: 14px; }
+  html { font-size: 13px; }
+  .glass-card { padding: 12px !important; }
 }
 
 @media (min-width: 375px) and (max-width: 429px) {
   /* iPhone 13/14/15 */
-  html { font-size: 15px; }
+  html { font-size: 14px; }
+  .glass-card { padding: 14px !important; }
 }
 
 @media (min-width: 430px) and (max-width: 767px) {
-  /* iPhone Pro Max */
-  html { font-size: 16px; }
+  /* iPhone Pro Max / Small Tablet */
+  html { font-size: 15px; }
+  .glass-card { padding: 16px !important; }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-  /* iPad */
-  html { font-size: 16px; }
+  /* iPad / Tablet */
+  html { font-size: 15px; }
+  .glass-card { padding: 18px !important; }
 }
 
-@media (min-width: 1024px) {
-  /* Desktop */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  /* Small Desktop / Laptop */
+  html { font-size: 15px; }
+  .glass-card { padding: 20px !important; }
+}
+
+@media (min-width: 1280px) and (max-width: 1535px) {
+  /* HD Desktop */
   html { font-size: 16px; }
+  .glass-card { padding: 22px !important; }
+}
+
+@media (min-width: 1536px) and (max-width: 1919px) {
+  /* Full HD */
+  html { font-size: 16px; }
+  .glass-card { padding: 24px !important; }
+}
+
+@media (min-width: 1920px) {
+  /* 2K / 4K */
+  html { font-size: 17px; }
+  .glass-card { padding: 28px !important; }
+}
+
+/* Container Query Support for Modern Browsers */
+@supports (container-type: inline-size) {
+  .responsive-container {
+    container-type: inline-size;
+  }
 }
 
 /* ==================

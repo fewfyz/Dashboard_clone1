@@ -30,10 +30,10 @@ const statusConfig = {
 function AlarmItem({ number, status, isActive }: AlarmItemProps) {
   const config = statusConfig[status];
   return (
-    <div className={`flex flex-col items-center gap-1.5 sm:gap-2 p-2 sm:p-3 rounded-xl transition-all duration-200
+    <div className={`flex flex-col items-center gap-1 sm:gap-1.5 lg:gap-2 p-1.5 sm:p-2 lg:p-3 rounded-lg sm:rounded-xl transition-all duration-200
       ${isActive ? 'bg-gray-100/80 ring-2 ring-[#00b4b4]/50' : 'hover:bg-gray-50'}`}>
-      <span className="text-[10px] sm:text-xs text-gray-600 font-semibold">{number}</span>
-      <span className={`${config.bg} text-white text-[9px] sm:text-[10px] px-2 sm:px-2.5 py-0.5 sm:py-1 
+      <span className="text-[9px] sm:text-[10px] lg:text-xs text-gray-600 font-semibold">{number}</span>
+      <span className={`${config.bg} text-white text-[8px] sm:text-[9px] lg:text-[10px] px-1.5 sm:px-2 lg:px-2.5 py-0.5 sm:py-1 
         rounded-full font-semibold`}>
         {config.text}
       </span>
@@ -52,9 +52,9 @@ export default function AlarmStatus() {
   ];
 
   return (
-    <div className="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 lg:p-6 animate-fade-in">
-      <h3 className="text-sm font-semibold text-gray-800 mb-3 sm:mb-4 tracking-wide">ALARM</h3>
-      <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5 sm:gap-2">
+    <div className="glass-card rounded-xl sm:rounded-2xl lg:rounded-3xl p-3 sm:p-4 lg:p-5 xl:p-6 animate-fade-in">
+      <h3 className="text-xs sm:text-sm font-semibold text-gray-800 mb-2 sm:mb-3 lg:mb-4 tracking-wide">ALARM</h3>
+      <div className="grid grid-cols-3 sm:grid-cols-6 gap-1 sm:gap-1.5 lg:gap-2">
         {alarms.map((alarm, index) => (
           <AlarmItem
             key={alarm.number}

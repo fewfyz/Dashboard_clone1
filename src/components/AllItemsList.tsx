@@ -32,22 +32,22 @@ function AllItem({ number, humidity, temperature, status }: AllItemProps) {
   const config = statusConfig[status];
 
   return (
-    <div className="flex items-center justify-between py-3 sm:py-4 border-b border-gray-100/80 last:border-0
-      hover:bg-gray-50/50 -mx-2 px-2 rounded-xl transition-colors">
-      <div className="flex items-center gap-3">
-        <div className="w-2.5 h-2.5 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full shadow-sm"></div>
-        <span className="text-sm sm:text-base font-semibold text-gray-700">{number}</span>
+    <div className="flex items-center justify-between py-2 sm:py-3 lg:py-4 border-b border-gray-100/80 last:border-0
+      hover:bg-gray-50/50 -mx-1.5 sm:-mx-2 px-1.5 sm:px-2 rounded-lg sm:rounded-xl transition-colors">
+      <div className="flex items-center gap-2 sm:gap-3">
+        <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full shadow-sm"></div>
+        <span className="text-xs sm:text-sm lg:text-base font-semibold text-gray-700">{number}</span>
       </div>
-      <div className="flex items-center gap-3 sm:gap-5">
-        <div className="flex items-center gap-1.5 text-sm text-gray-600">
-          <Droplets size={16} className="text-teal-500" />
+      <div className="flex items-center gap-2 sm:gap-3 lg:gap-5">
+        <div className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm text-gray-600">
+          <Droplets size={14} className="sm:w-4 sm:h-4 text-teal-500" />
           <span className="font-medium">{humidity}%</span>
         </div>
-        <div className="flex items-center gap-1.5 text-sm text-gray-600">
-          <Thermometer size={16} className="text-orange-400" />
+        <div className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm text-gray-600">
+          <Thermometer size={14} className="sm:w-4 sm:h-4 text-orange-400" />
           <span className="font-medium">{temperature}°C</span>
         </div>
-        <span className={`${config.bg} text-white text-[10px] sm:text-xs px-2.5 py-1 rounded-full font-semibold shadow-md ${config.shadow}`}>
+        <span className={`${config.bg} text-white text-[9px] sm:text-[10px] lg:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full font-semibold shadow-md ${config.shadow}`}>
           {config.text}
         </span>
       </div>
@@ -62,15 +62,15 @@ export default function AllItemsList() {
   ];
 
   return (
-    <div className="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 lg:p-6 animate-fade-in">
-      <div className="flex items-center justify-between mb-3 sm:mb-4">
-        <h3 className="text-sm font-semibold text-gray-800 tracking-wide">ALL</h3>
-        <button className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full
+    <div className="glass-card rounded-xl sm:rounded-2xl lg:rounded-3xl p-3 sm:p-4 lg:p-5 xl:p-6 animate-fade-in">
+      <div className="flex items-center justify-between mb-2 sm:mb-3 lg:mb-4">
+        <h3 className="text-xs sm:text-sm font-semibold text-gray-800 tracking-wide">ALL</h3>
+        <button className="w-7 h-7 sm:w-9 sm:h-9 lg:w-10 lg:h-10 flex items-center justify-center rounded-full
           hover:bg-gray-100 active:bg-gray-200 transition-colors
           focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           aria-label="View all items"
         >
-          <ChevronRight size={18} className="text-gray-400" />
+          <ChevronRight size={16} className="sm:w-[18px] sm:h-[18px] text-gray-400" />
         </button>
       </div>
       <div>

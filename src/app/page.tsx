@@ -87,16 +87,16 @@ export default function Dashboard() {
 
   // Render Home page (default)
   return (
-    <div className="min-h-screen min-h-[100dvh] w-full bg-gradient-to-br from-[#e8f4f4] to-[#d4ebeb] p-2 sm:p-4 lg:p-5 flex flex-col lg:flex-row">
+    <div className="min-h-screen min-h-[100dvh] w-full bg-gradient-to-br from-[#e8f4f4] to-[#d4ebeb] p-1.5 sm:p-2 md:p-3 lg:p-4 xl:p-5 flex flex-col lg:flex-row">
       {/* Mobile Menu Button - Apple Style */}
       <button 
-        className="lg:hidden fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-xl text-gray-800 p-3 rounded-2xl shadow-lg 
+        className="lg:hidden fixed top-3 left-3 z-50 bg-white/80 backdrop-blur-xl text-gray-800 p-2.5 sm:p-3 rounded-xl sm:rounded-2xl shadow-lg 
           border border-white/20 transition-all duration-200 active:scale-95"
         onClick={() => setSidebarOpen(!sidebarOpen)}
         aria-label={sidebarOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={sidebarOpen}
       >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={sidebarOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
         </svg>
       </button>
@@ -116,15 +116,15 @@ export default function Dashboard() {
       )}
       
       {/* Main Content */}
-      <main className="flex-1 lg:ml-5 flex flex-col overflow-hidden mt-16 lg:mt-0">
+      <main className="flex-1 lg:ml-3 xl:ml-4 2xl:ml-5 flex flex-col overflow-hidden mt-14 sm:mt-16 lg:mt-0">
         {/* Header */}
         <Header />
         
         {/* Dashboard Content */}
-        <div className="flex-1 overflow-y-auto px-1 sm:px-2 pb-6">
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-5">
+        <div className="flex-1 overflow-y-auto px-0.5 sm:px-1 lg:px-2 pb-4 sm:pb-6">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-2 sm:gap-3 lg:gap-4 xl:gap-5">
             {/* Left Column */}
-            <div className="flex flex-col gap-4 lg:gap-5">
+            <div className="flex flex-col gap-2 sm:gap-3 lg:gap-4 xl:gap-5">
               {/* Storage Box 1 */}
               <StorageBox boxNumber={1} data={storageBox1Data} />
               
@@ -138,14 +138,14 @@ export default function Dashboard() {
             </div>
             
             {/* Right Column */}
-            <div className="flex flex-col gap-4 lg:gap-5">
+            <div className="flex flex-col gap-2 sm:gap-3 lg:gap-4 xl:gap-5">
               {/* Storage Box 2 */}
               <StorageBox boxNumber={2} data={storageBox2Data} />
               
               {/* System Overview - Glass Card */}
-              <div className="glass-card p-5 flex-1 min-h-[300px] animate-fade-in" style={{ animationDelay: '100ms' }}>
-                <h3 className="text-lg font-semibold text-gray-800 mb-5 tracking-tight">System Overview</h3>
-                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="glass-card p-3 sm:p-4 lg:p-5 flex-1 min-h-[250px] sm:min-h-[280px] lg:min-h-[300px] animate-fade-in" style={{ animationDelay: '100ms' }}>
+                <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-800 mb-3 sm:mb-4 lg:mb-5 tracking-tight">System Overview</h3>
+                <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4">
                   {[
                     { label: 'Total Items', value: '60', change: '↑ 5% from last week', color: 'teal', positive: true },
                     { label: 'In Testing', value: '8', change: '3 pending review', color: 'yellow', positive: null },
@@ -154,25 +154,25 @@ export default function Dashboard() {
                   ].map((stat, index) => (
                     <div 
                       key={stat.label}
-                      className={`bg-gradient-to-br from-${stat.color}-50 to-${stat.color}-100/50 rounded-2xl p-4 
+                      className={`bg-gradient-to-br from-${stat.color}-50 to-${stat.color}-100/50 rounded-xl sm:rounded-2xl p-2.5 sm:p-3 lg:p-4 
                         transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-default`}
                       style={{ animationDelay: `${index * 50}ms` }}
                     >
-                      <div className="text-xs font-medium text-gray-500 mb-1">{stat.label}</div>
-                      <div className={`text-2xl sm:text-3xl font-bold text-${stat.color}-600 tabular-nums`}>{stat.value}</div>
-                      <div className={`text-xs mt-1 font-medium ${
+                      <div className="text-[10px] sm:text-xs font-medium text-gray-500 mb-0.5 sm:mb-1">{stat.label}</div>
+                      <div className={`text-lg sm:text-2xl lg:text-3xl font-bold text-${stat.color}-600 tabular-nums`}>{stat.value}</div>
+                      <div className={`text-[10px] sm:text-xs mt-0.5 sm:mt-1 font-medium ${
                         stat.positive === true ? 'text-green-500' : 
                         stat.positive === false ? 'text-red-500' : 
                         'text-gray-400'
                       }`}>{stat.change}</div>
                     </div>
-                  ))}
+                  ))}}
                 </div>
                 
                 {/* Activity Timeline - Apple Style */}
-                <div className="mt-5">
-                  <h4 className="font-semibold text-gray-700 mb-3 text-sm">Recent Activity</h4>
-                  <div className="space-y-2">
+                <div className="mt-3 sm:mt-4 lg:mt-5">
+                  <h4 className="font-semibold text-gray-700 mb-2 sm:mb-3 text-xs sm:text-sm">Recent Activity</h4>
+                  <div className="space-y-1.5 sm:space-y-2">
                     {[
                       { color: 'teal', text: 'Shaft 1 status updated to Normal', time: '2 min ago' },
                       { color: 'yellow', text: 'Capacitive 3 moved to Testing', time: '15 min ago' },
@@ -180,11 +180,11 @@ export default function Dashboard() {
                     ].map((activity, index) => (
                       <div 
                         key={index}
-                        className="flex items-center gap-3 p-3 bg-gray-50/80 rounded-xl hover:bg-gray-100 transition-colors duration-200"
+                        className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-gray-50/80 rounded-lg sm:rounded-xl hover:bg-gray-100 transition-colors duration-200"
                       >
-                        <div className={`w-2 h-2 bg-${activity.color}-500 rounded-full flex-shrink-0 animate-pulse`}></div>
-                        <span className="text-sm text-gray-600 flex-1">{activity.text}</span>
-                        <span className="text-xs text-gray-400 font-medium whitespace-nowrap">{activity.time}</span>
+                        <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 bg-${activity.color}-500 rounded-full flex-shrink-0 animate-pulse`}></div>
+                        <span className="text-xs sm:text-sm text-gray-600 flex-1 truncate">{activity.text}</span>
+                        <span className="text-[10px] sm:text-xs text-gray-400 font-medium whitespace-nowrap">{activity.time}</span>
                       </div>
                     ))}
                   </div>
