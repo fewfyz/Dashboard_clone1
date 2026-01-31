@@ -71,20 +71,41 @@ const case01Data = {
 
 export default function Dashboard() {
   const [activeMenuItem, setActiveMenuItem] = useState('home');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="w-[1920px] h-[1080px] bg-[#c5e8e8] p-4 flex">
+    <div className="min-h-screen w-full bg-[#c5e8e8] p-2 sm:p-4 flex flex-col lg:flex-row">
+      {/* Mobile Menu Button */}
+      <button 
+        className="lg:hidden fixed top-4 left-4 z-50 bg-teal-500 text-white p-2 rounded-lg shadow-lg"
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={sidebarOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+        </svg>
+      </button>
+
       {/* Sidebar */}
-      <Sidebar activeItem={activeMenuItem} onItemClick={setActiveMenuItem} />
+      <div className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 fixed lg:relative z-40 transition-transform duration-300 ease-in-out`}>
+        <Sidebar activeItem={activeMenuItem} onItemClick={(item) => { setActiveMenuItem(item); setSidebarOpen(false); }} />
+      </div>
+      
+      {/* Overlay for mobile */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden" 
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
       
       {/* Main Content */}
-      <div className="flex-1 ml-4 flex flex-col overflow-hidden">
+      <div className="flex-1 lg:ml-4 flex flex-col overflow-hidden mt-14 lg:mt-0">
         {/* Header */}
         <Header />
         
         {/* Dashboard Content */}
-        <div className="flex-1 overflow-y-auto pr-2">
-          <div className="grid grid-cols-2 gap-4">
+        <div className="flex-1 overflow-y-auto pr-0 sm:pr-2">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
             {/* Left Column */}
             <div className="flex flex-col gap-4">
               {/* Storage Box 1 */}
@@ -107,25 +128,25 @@ export default function Dashboard() {
               {/* Additional content area */}
               <div className="card flex-1 min-h-[300px]">
                 <h3 className="text-lg font-bold text-gray-800 mb-4">System Overview</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-4">
-                    <div className="text-sm text-gray-500 mb-1">Total Items</div>
-                    <div className="text-3xl font-bold text-teal-600">60</div>
+                <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div className="bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-3 sm:p-4">
+                    <div className="text-xs sm:text-sm text-gray-500 mb-1">Total Items</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-teal-600">60</div>
                     <div className="text-xs text-green-500 mt-1">↑ 5% from last week</div>
                   </div>
-                  <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-4">
-                    <div className="text-sm text-gray-500 mb-1">In Testing</div>
-                    <div className="text-3xl font-bold text-yellow-600">8</div>
+                  <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-3 sm:p-4">
+                    <div className="text-xs sm:text-sm text-gray-500 mb-1">In Testing</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-yellow-600">8</div>
                     <div className="text-xs text-yellow-500 mt-1">3 pending review</div>
                   </div>
-                  <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-4">
-                    <div className="text-sm text-gray-500 mb-1">Damaged</div>
-                    <div className="text-3xl font-bold text-red-600">3</div>
+                  <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-3 sm:p-4">
+                    <div className="text-xs sm:text-sm text-gray-500 mb-1">Damaged</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-red-600">3</div>
                     <div className="text-xs text-red-500 mt-1">Needs attention</div>
                   </div>
-                  <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4">
-                    <div className="text-sm text-gray-500 mb-1">Normal Status</div>
-                    <div className="text-3xl font-bold text-green-600">44</div>
+                  <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-3 sm:p-4">
+                    <div className="text-xs sm:text-sm text-gray-500 mb-1">Normal Status</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-green-600">44</div>
                     <div className="text-xs text-green-500 mt-1">73% of total</div>
                   </div>
                 </div>
@@ -134,20 +155,20 @@ export default function Dashboard() {
                 <div className="mt-4">
                   <h4 className="font-semibold text-gray-700 mb-3">Recent Activity</h4>
                   <div className="space-y-2">
-                    <div className="flex items-center gap-3 p-2 bg-gray-50 rounded-lg">
-                      <div className="w-2 h-2 bg-teal-500 rounded-full"></div>
-                      <span className="text-sm text-gray-600">Shaft 1 status updated to Normal</span>
-                      <span className="text-xs text-gray-400 ml-auto">2 min ago</span>
+                    <div className="flex items-center gap-2 sm:gap-3 p-2 bg-gray-50 rounded-lg">
+                      <div className="w-2 h-2 bg-teal-500 rounded-full flex-shrink-0"></div>
+                      <span className="text-xs sm:text-sm text-gray-600 flex-1">Shaft 1 status updated to Normal</span>
+                      <span className="text-xs text-gray-400 whitespace-nowrap">2 min ago</span>
                     </div>
-                    <div className="flex items-center gap-3 p-2 bg-gray-50 rounded-lg">
-                      <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                      <span className="text-sm text-gray-600">Capacitive 3 moved to Testing</span>
-                      <span className="text-xs text-gray-400 ml-auto">15 min ago</span>
+                    <div className="flex items-center gap-2 sm:gap-3 p-2 bg-gray-50 rounded-lg">
+                      <div className="w-2 h-2 bg-yellow-400 rounded-full flex-shrink-0"></div>
+                      <span className="text-xs sm:text-sm text-gray-600 flex-1">Capacitive 3 moved to Testing</span>
+                      <span className="text-xs text-gray-400 whitespace-nowrap">15 min ago</span>
                     </div>
-                    <div className="flex items-center gap-3 p-2 bg-gray-50 rounded-lg">
-                      <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                      <span className="text-sm text-gray-600">Blanket 5 marked as Damage</span>
-                      <span className="text-xs text-gray-400 ml-auto">1 hour ago</span>
+                    <div className="flex items-center gap-2 sm:gap-3 p-2 bg-gray-50 rounded-lg">
+                      <div className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0"></div>
+                      <span className="text-xs sm:text-sm text-gray-600 flex-1">Blanket 5 marked as Damage</span>
+                      <span className="text-xs text-gray-400 whitespace-nowrap">1 hour ago</span>
                     </div>
                   </div>
                 </div>

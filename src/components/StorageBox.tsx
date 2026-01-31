@@ -51,28 +51,28 @@ export default function StorageBox({ boxNumber, data }: StorageBoxProps) {
       </div>
       
       {/* Stats and Controls */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         {/* Stats */}
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center gap-4 sm:gap-6">
           <div className="text-center">
             <div className="text-xs text-gray-400">Total</div>
-            <div className="text-xl font-bold text-gray-800">{data.total}</div>
+            <div className="text-lg sm:text-xl font-bold text-gray-800">{data.total}</div>
           </div>
           <div className="text-center">
             <div className="text-xs text-gray-400">Delay</div>
-            <div className="text-xl font-bold text-teal-500">{data.delay}</div>
+            <div className="text-lg sm:text-xl font-bold text-teal-500">{data.delay}</div>
           </div>
           <div className="text-center">
             <div className="text-xs text-gray-400">Detection</div>
-            <div className="text-xl font-bold text-red-500">{data.detection}</div>
+            <div className="text-lg sm:text-xl font-bold text-red-500">{data.detection}</div>
           </div>
           <div className="text-center">
             <div className="text-xs text-gray-400">Scrap</div>
-            <div className="text-xl font-bold text-teal-500">{data.scrap}</div>
+            <div className="text-lg sm:text-xl font-bold text-teal-500">{data.scrap}</div>
           </div>
           
           {/* Divider */}
-          <div className="w-px h-10 bg-gray-200 mx-2"></div>
+          <div className="hidden sm:block w-px h-10 bg-gray-200 mx-2"></div>
           
           {/* Environment */}
           <div className="flex items-center gap-1">
