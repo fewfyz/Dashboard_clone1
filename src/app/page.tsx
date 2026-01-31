@@ -5,6 +5,7 @@ import Sidebar from '@/components/Sidebar';
 import Header from '@/components/Header';
 import StorageBox from '@/components/StorageBox';
 import CaseSection from '@/components/CaseSection';
+import MonitorPage from '@/components/MonitorPage';
 
 // Mock data for Storage Box 1
 const storageBox1Data = {
@@ -70,9 +71,15 @@ const case01Data = {
 };
 
 export default function Dashboard() {
-  const [activeMenuItem, setActiveMenuItem] = useState('home');
+  const [currentPage, setCurrentPage] = useState('home');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  // Render Monitor page
+  if (currentPage === 'monitor') {
+    return <MonitorPage onNavigate={setCurrentPage} />;
+  }
+
+  // Render Home page (default)
   return (
     <div className="min-h-screen w-full bg-[#c5e8e8] p-2 sm:p-4 flex flex-col lg:flex-row">
       {/* Mobile Menu Button */}
@@ -87,7 +94,7 @@ export default function Dashboard() {
 
       {/* Sidebar */}
       <div className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 fixed lg:relative z-40 transition-transform duration-300 ease-in-out`}>
-        <Sidebar activeItem={activeMenuItem} onItemClick={(item) => { setActiveMenuItem(item); setSidebarOpen(false); }} />
+        <Sidebar activeItem={currentPage} onItemClick={(item) => { setCurrentPage(item); setSidebarOpen(false); }} />
       </div>
       
       {/* Overlay for mobile */}
