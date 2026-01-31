@@ -2,10 +2,28 @@
 
 import React, { useState } from 'react';
 import { MapPin, Hexagon } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+// Dynamically import the map component to avoid SSR issues
+const MapComponent = dynamic(() => import('./MapComponent'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50 flex items-center justify-center">
+      <div className="animate-pulse text-gray-400 text-sm">Loading map...</div>
+    </div>
+  ),
+});
+
+// Dam location coordinates (example: a dam in Thailand)
+const DAM_LOCATION = {
+  latitude: 14.4426,
+  longitude: 101.3705,
+  name: "Dam Monitoring Station"
+};
 
 export default function LocationMap() {
   const [activeView, setActiveView] = useState<'location' | 'geometry'>('location');
-  const [mapEnabled, setMapEnabled] = useState(false);
+  const [mapEnabled, setMapEnabled] = useState(true);
 
   return (
     <div className="glass-card rounded-xl sm:rounded-2xl lg:rounded-3xl p-3 sm:p-4 lg:p-5 flex flex-col animate-fade-in">
@@ -13,7 +31,7 @@ export default function LocationMap() {
       <div className="flex items-center justify-between mb-2 sm:mb-3">
         <h3 className="text-xs sm:text-sm font-semibold text-gray-800 tracking-wide">LOCATION</h3>
         <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3">
-          <span className="text-[10px] sm:text-[11px] lg:text-xs font-medium text-gray-500">OFF</span>
+          <span className="text-[10px] sm:text-[11px] lg:text-xs font-medium text-gray-500">{mapEnabled ? 'ON' : 'OFF'}</span>
           <button
             onClick={() => setMapEnabled(!mapEnabled)}
             className={`relative w-[42px] h-[26px] sm:w-[48px] sm:h-[28px] rounded-full transition-all duration-300 ease-out
@@ -33,35 +51,31 @@ export default function LocationMap() {
 
       {/* Map Area */}
       <div className="relative flex-1 min-h-[120px] sm:min-h-[140px] lg:min-h-[160px] bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50 rounded-xl sm:rounded-2xl mb-2 sm:mb-3 overflow-hidden shadow-inner">
-        {/* Simulated map grid */}
-        <svg className="absolute inset-0 w-full h-full opacity-20">
-          <defs>
-            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#64748b" strokeWidth="0.5"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-        
-        {/* Map roads simulation */}
-        <svg className="absolute inset-0 w-full h-full">
-          <line x1="20%" y1="30%" x2="80%" y2="30%" stroke="#f97316" strokeWidth="2.5" opacity="0.5" strokeLinecap="round"/>
-          <line x1="50%" y1="10%" x2="50%" y2="90%" stroke="#f97316" strokeWidth="2.5" opacity="0.5" strokeLinecap="round"/>
-          <line x1="30%" y1="50%" x2="70%" y2="70%" stroke="#94a3b8" strokeWidth="1.5" opacity="0.4" strokeLinecap="round"/>
-          <line x1="20%" y1="60%" x2="60%" y2="40%" stroke="#94a3b8" strokeWidth="1.5" opacity="0.4" strokeLinecap="round"/>
-        </svg>
-
-        {/* Location marker */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <div className="relative">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full 
-              flex items-center justify-center shadow-xl animate-pulse ring-2 sm:ring-4 ring-teal-200/50">
-              <MapPin size={16} className="sm:w-5 sm:h-5 text-white" />
+        {mapEnabled ? (
+          <MapComponent
+            latitude={DAM_LOCATION.latitude}
+            longitude={DAM_LOCATION.longitude}
+            zoom={14}
+            markerTitle={DAM_LOCATION.name}
+          />
+        ) : (
+          <>
+            {/* Simulated map grid when disabled */}
+            <svg className="absolute inset-0 w-full h-full opacity-20">
+              <defs>
+                <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#64748b" strokeWidth="0.5"/>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+            
+            {/* Disabled state message */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-gray-400 text-sm font-medium">Map disabled</div>
             </div>
-            <div className="absolute -bottom-1 sm:-bottom-1.5 left-1/2 transform -translate-x-1/2 w-3 h-3 sm:w-4 sm:h-4 
-              bg-gradient-to-br from-teal-400 to-teal-600 rotate-45 shadow-md"></div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
 
       {/* View Toggle Buttons */}
