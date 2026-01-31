@@ -38,13 +38,13 @@ export default function StorageBox({ boxNumber, data }: StorageBoxProps) {
             className="p-2.5 hover:bg-gray-100 rounded-xl transition-all duration-200 active:scale-95"
             aria-label="Refresh"
           >
-            <RefreshCw size={16} className="text-teal-500" />
+            <RefreshCw size={16} className="text-[#00b4b4]" />
           </button>
           <button 
             className="p-2.5 hover:bg-gray-100 rounded-xl transition-all duration-200 active:scale-95"
             aria-label="Expand"
           >
-            <ChevronDown size={16} className="text-teal-500" />
+            <ChevronDown size={16} className="text-[#00b4b4]" />
           </button>
         </div>
       </div>
@@ -64,9 +64,9 @@ export default function StorageBox({ boxNumber, data }: StorageBoxProps) {
         <div className="flex flex-wrap items-center gap-5">
           {[
             { label: 'Total', value: data.total, color: 'text-gray-800' },
-            { label: 'Delay', value: data.delay, color: 'text-teal-500' },
+            { label: 'Delay', value: data.delay, color: 'text-[#00b4b4]' },
             { label: 'Detection', value: data.detection, color: 'text-red-500' },
-            { label: 'Scrap', value: data.scrap, color: 'text-teal-500' },
+            { label: 'Scrap', value: data.scrap, color: 'text-[#00b4b4]' },
           ].map((stat) => (
             <div key={stat.label} className="text-center min-w-[48px]">
               <div className="text-[11px] font-medium text-gray-400 uppercase tracking-wide">{stat.label}</div>
@@ -78,8 +78,8 @@ export default function StorageBox({ boxNumber, data }: StorageBoxProps) {
           <div className="hidden sm:block w-px h-10 bg-gray-200/60 mx-1"></div>
           
           {/* Environment */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-teal-50 rounded-lg">
-            <Droplets size={16} className="text-teal-500" />
+          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#e8f4f4] rounded-lg">
+            <Droplets size={16} className="text-[#00b4b4]" />
             <span className="text-sm font-medium text-gray-700">{data.humidity}%</span>
           </div>
           <div className="flex items-center gap-1.5 px-3 py-1.5 bg-orange-50 rounded-lg">
@@ -88,12 +88,12 @@ export default function StorageBox({ boxNumber, data }: StorageBoxProps) {
           </div>
         </div>
         
-        {/* Controls - iOS Style Buttons */}
-        <div className="flex items-center gap-2">
+        {/* Controls - Teal Buttons matching screenshot */}
+        <div className="flex items-center gap-3">
           <button 
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-200 active:scale-95 min-h-[44px] ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl transition-all duration-200 active:scale-95 min-h-[48px] ${
               data.doorStatus === 'on' 
-                ? 'bg-teal-500 text-white shadow-md shadow-teal-500/30' 
+                ? 'bg-[#00b4b4] text-white' 
                 : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
             }`}
           >
@@ -105,9 +105,9 @@ export default function StorageBox({ boxNumber, data }: StorageBoxProps) {
           </button>
           
           <button 
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-200 active:scale-95 min-h-[44px] ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl transition-all duration-200 active:scale-95 min-h-[48px] ${
               data.lightStatus === 'on' 
-                ? 'bg-teal-500 text-white shadow-md shadow-teal-500/30' 
+                ? 'bg-[#00b4b4] text-white' 
                 : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
             }`}
           >

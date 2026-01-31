@@ -34,7 +34,7 @@ export default function StorageBoxMini({ boxNumber, data }: StorageBoxMiniProps)
           </div>
           <div className="text-center">
             <div className="text-[11px] sm:text-xs font-medium text-gray-400 uppercase tracking-wide">Delay</div>
-            <div className="text-xl sm:text-2xl font-bold text-teal-500">{data.delay}</div>
+            <div className="text-xl sm:text-2xl font-bold text-[#00b4b4]">{data.delay}</div>
           </div>
           <div className="text-center">
             <div className="text-[11px] sm:text-xs font-medium text-gray-400 uppercase tracking-wide">Detection</div>
@@ -42,12 +42,12 @@ export default function StorageBoxMini({ boxNumber, data }: StorageBoxMiniProps)
           </div>
           <div className="text-center">
             <div className="text-[11px] sm:text-xs font-medium text-gray-400 uppercase tracking-wide">Scrap</div>
-            <div className="text-xl sm:text-2xl font-bold text-teal-500">{data.scrap}</div>
+            <div className="text-xl sm:text-2xl font-bold text-[#00b4b4]">{data.scrap}</div>
           </div>
           
           {/* Environment */}
           <div className="hidden sm:flex items-center gap-1.5 ml-4">
-            <Droplets size={18} className="text-teal-500" />
+            <Droplets size={18} className="text-[#00b4b4]" />
             <span className="text-sm font-medium text-gray-600">{data.humidity}%</span>
           </div>
           <div className="hidden sm:flex items-center gap-1.5">
@@ -59,10 +59,10 @@ export default function StorageBoxMini({ boxNumber, data }: StorageBoxMiniProps)
         {/* Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
           <button 
-            className={`min-h-[44px] flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-200
+            className={`min-h-[44px] flex items-center gap-2 px-4 py-2.5 rounded-2xl transition-all duration-200
               focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
               ${data.doorStatus === 'on' 
-                ? 'bg-gradient-to-r from-teal-400 to-teal-600 text-white shadow-lg shadow-teal-500/25 focus-visible:ring-teal-500' 
+                ? 'bg-[#00b4b4] text-white focus-visible:ring-[#00b4b4]' 
                 : 'bg-gray-100 text-gray-500 hover:bg-gray-200 focus-visible:ring-gray-400'
               }`}
           >
@@ -74,10 +74,10 @@ export default function StorageBoxMini({ boxNumber, data }: StorageBoxMiniProps)
           </button>
           
           <button 
-            className={`min-h-[44px] flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-200
+            className={`min-h-[44px] flex items-center gap-2 px-4 py-2.5 rounded-2xl transition-all duration-200
               focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
               ${data.lightStatus === 'on' 
-                ? 'bg-gradient-to-r from-teal-400 to-teal-600 text-white shadow-lg shadow-teal-500/25 focus-visible:ring-teal-500' 
+                ? 'bg-[#00b4b4] text-white focus-visible:ring-[#00b4b4]' 
                 : 'bg-gray-100 text-gray-500 hover:bg-gray-200 focus-visible:ring-gray-400'
               }`}
           >
@@ -92,10 +92,10 @@ export default function StorageBoxMini({ boxNumber, data }: StorageBoxMiniProps)
 
       {/* Status Badges */}
       <div className="flex flex-wrap gap-2 sm:gap-3">
-        <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 text-white px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-md shadow-emerald-500/25">
-          Normal <span className="bg-white/25 px-2 py-0.5 rounded-full ml-1.5">{data.normalCount}</span>
+        <span className="bg-[#00b4b4] text-white px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium">
+          Normal <span className="bg-white/30 px-2 py-0.5 rounded-full ml-1.5">{data.normalCount}</span>
         </span>
-        <span className="bg-gradient-to-r from-amber-400 to-amber-500 text-gray-800 px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-md shadow-amber-500/25">
+        <span className="bg-[#fbbf24] text-gray-800 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium">
           Testing <span className="bg-white/30 px-2 py-0.5 rounded-full ml-1.5">{data.testingCount}</span>
         </span>
       </div>

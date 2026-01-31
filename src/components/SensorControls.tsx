@@ -19,8 +19,8 @@ function ToggleButton({ label, icon, isOn, onToggle }: ToggleButtonProps) {
         <button
           onClick={onToggle}
           className={`relative w-[51px] h-[31px] rounded-full transition-all duration-300 ease-out
-            ${isOn ? 'bg-[#34c759]' : 'bg-gray-300'}
-            focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`}
+            ${isOn ? 'bg-[#00b4b4]' : 'bg-gray-300'}
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00b4b4] focus-visible:ring-offset-2`}
           role="switch"
           aria-checked={isOn}
           aria-label={`${label} toggle`}
@@ -32,7 +32,7 @@ function ToggleButton({ label, icon, isOn, onToggle }: ToggleButtonProps) {
         </button>
         <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200
           ${isOn 
-            ? 'bg-gradient-to-br from-teal-400 to-teal-600 text-white shadow-md' 
+            ? 'bg-[#00b4b4] text-white' 
             : 'bg-gray-100 text-gray-500'}`}>
           {icon}
         </div>
@@ -61,14 +61,14 @@ function ValueControl({ label, value, unit, icon, onIncrease, onDecrease, isOn, 
           onClick={onToggle}
           className={`min-h-[32px] px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200
             ${isOn 
-              ? 'bg-gradient-to-r from-teal-400 to-teal-600 text-white shadow-md' 
+              ? 'bg-[#00b4b4] text-white' 
               : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}
         >
           {isOn ? 'ON' : 'OFF'}
         </button>
       </div>
       <div className="flex items-center gap-3 sm:gap-4">
-        <div className="text-teal-500">{icon}</div>
+        <div className="text-[#00b4b4]">{icon}</div>
         <span className="text-3xl sm:text-4xl font-bold text-gray-800 tracking-tight">{value}</span>
         <span className="text-xl sm:text-2xl font-medium text-gray-400">{unit}</span>
         <div className="flex items-center gap-2 ml-auto">
@@ -76,7 +76,7 @@ function ValueControl({ label, value, unit, icon, onIncrease, onDecrease, isOn, 
             onClick={onIncrease}
             className="w-10 h-10 sm:w-11 sm:h-11 bg-gray-50 hover:bg-gray-100 active:bg-gray-200 
               rounded-xl flex items-center justify-center transition-all duration-150
-              focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00b4b4]"
             aria-label={`Increase ${label}`}
           >
             <Plus size={18} className="text-gray-600" />

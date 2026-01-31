@@ -48,8 +48,8 @@ export default function Header() {
       
       {/* Humidity */}
       <div className="flex items-center gap-1.5 text-gray-600">
-        <div className="p-1.5 bg-teal-50 rounded-lg">
-          <Droplets size={16} className="text-teal-500" />
+        <div className="p-1.5 bg-[#e8f4f4] rounded-lg">
+          <Droplets size={16} className="text-[#00b4b4]" />
         </div>
         <span className="text-sm font-medium">63%</span>
       </div>

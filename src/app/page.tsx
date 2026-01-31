@@ -87,7 +87,7 @@ export default function Dashboard() {
 
   // Render Home page (default)
   return (
-    <div className="min-h-screen min-h-[100dvh] w-full bg-[#c5e8e8] p-2 sm:p-4 lg:p-5 flex flex-col lg:flex-row">
+    <div className="min-h-screen min-h-[100dvh] w-full bg-gradient-to-br from-[#e8f4f4] to-[#d4ebeb] p-2 sm:p-4 lg:p-5 flex flex-col lg:flex-row">
       {/* Mobile Menu Button - Apple Style */}
       <button 
         className="lg:hidden fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-xl text-gray-800 p-3 rounded-2xl shadow-lg 

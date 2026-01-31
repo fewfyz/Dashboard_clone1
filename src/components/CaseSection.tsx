@@ -29,9 +29,9 @@ interface CaseSectionProps {
 }
 
 const sections = [
-  { key: 'shaft', label: 'Shaft', color: 'bg-teal-500' },
-  { key: 'capacitive', label: 'Capacitive', color: 'bg-yellow-400' },
-  { key: 'blanket', label: 'Insulating blanket', color: 'bg-orange-400' },
+  { key: 'shaft', label: 'Shaft', color: 'bg-[#00b4b4]' },
+  { key: 'capacitive', label: 'Capacitive', color: 'bg-[#fbbf24]' },
+  { key: 'blanket', label: 'Insulating blanket', color: 'bg-[#f97316]' },
 ];
 
 export default function CaseSection({ caseNumber, shaftItems, capacitiveItems, blanketItems }: CaseSectionProps) {
@@ -69,14 +69,14 @@ export default function CaseSection({ caseNumber, shaftItems, capacitiveItems, b
         ))}
       </div>
       
-      {/* Pagination Dots - iOS Style */}
+      {/* Pagination Dots */}
       <div className="flex justify-center gap-2 mt-5">
         {[0, 1, 2].map((dot) => (
           <button
             key={dot}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               dot === 0 
-                ? 'bg-teal-500 w-6' 
+                ? 'bg-[#00b4b4] w-6' 
                 : 'bg-gray-300 hover:bg-gray-400'
             }`}
             aria-label={`Page ${dot + 1}`}

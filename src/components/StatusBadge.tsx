@@ -3,40 +3,45 @@
 import React from 'react';
 
 interface StatusBadgeProps {
-  status: 'normal' | 'testing' | 'lost' | 'damage' | 'scrap';
+  status: 'normal' | 'testing' | 'lost' | 'damage' | 'scrap' | 'storage' | 'late';
   count: number;
 }
 
 const statusConfig = {
   normal: { 
-    bg: 'bg-gradient-to-r from-teal-500 to-teal-400', 
+    bg: 'bg-[#00b4b4]', 
     text: 'text-white', 
-    label: 'Normal',
-    shadow: 'shadow-teal-500/25'
+    label: 'Normal'
   },
   testing: { 
-    bg: 'bg-gradient-to-r from-yellow-400 to-amber-400', 
+    bg: 'bg-[#fbbf24]', 
     text: 'text-gray-800', 
-    label: 'Testing',
-    shadow: 'shadow-yellow-400/25'
+    label: 'Testing'
   },
   lost: { 
-    bg: 'bg-gradient-to-r from-orange-500 to-orange-400', 
+    bg: 'bg-[#ef4444]', 
     text: 'text-white', 
-    label: 'Lost',
-    shadow: 'shadow-orange-500/25'
+    label: 'Lost'
+  },
+  storage: { 
+    bg: 'bg-[#f97316]', 
+    text: 'text-white', 
+    label: 'Storage'
+  },
+  late: { 
+    bg: 'bg-[#3b82f6]', 
+    text: 'text-white', 
+    label: 'Late'
   },
   damage: { 
-    bg: 'bg-gradient-to-r from-red-500 to-red-400', 
+    bg: 'bg-[#ef4444]', 
     text: 'text-white', 
-    label: 'Damage',
-    shadow: 'shadow-red-500/25'
+    label: 'Damage'
   },
   scrap: { 
-    bg: 'bg-gradient-to-r from-gray-500 to-gray-400', 
+    bg: 'bg-[#9ca3af]', 
     text: 'text-white', 
-    label: 'Scrap',
-    shadow: 'shadow-gray-500/25'
+    label: 'Scrap'
   },
 };
 
@@ -45,11 +50,11 @@ export default function StatusBadge({ status, count }: StatusBadgeProps) {
   
   return (
     <span 
-      className={`${config.bg} ${config.text} ${config.shadow} px-3 py-1.5 rounded-full text-xs font-semibold 
-        inline-flex items-center gap-1.5 shadow-sm transition-transform duration-200 hover:scale-105 cursor-default`}
+      className={`${config.bg} ${config.text} px-3 py-1 rounded-full text-xs font-medium 
+        inline-flex items-center gap-1.5 cursor-default`}
     >
       {config.label}
-      <span className="bg-white/25 px-1.5 py-0.5 rounded-full text-[10px] font-bold min-w-[20px] text-center">
+      <span className="bg-white/30 px-1.5 py-0.5 rounded-full text-[10px] font-bold min-w-[18px] text-center">
         {count}
       </span>
     </span>

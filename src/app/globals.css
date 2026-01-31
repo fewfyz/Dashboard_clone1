@@ -12,33 +12,40 @@
   --font-system: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 
                  'Helvetica Neue', 'Segoe UI', Roboto, sans-serif;
   
-  /* Light Mode Colors */
-  --color-bg-primary: #f5f5f7;
+  /* Light Mode Colors - Matching Screenshot */
+  --color-bg-primary: #e8f4f4;
   --color-bg-secondary: #ffffff;
-  --color-bg-tertiary: #e8e8ed;
+  --color-bg-tertiary: #f0f7f7;
   --color-surface: #ffffff;
-  --color-surface-elevated: rgba(255, 255, 255, 0.72);
+  --color-surface-elevated: #ffffff;
   
   /* Semantic Colors */
-  --color-primary: #007aff;
-  --color-primary-hover: #0056b3;
-  --color-secondary: #5856d6;
-  --color-success: #34c759;
+  --color-primary: #00b4b4;
+  --color-primary-hover: #009999;
+  --color-secondary: #007aff;
+  --color-success: #00b4b4;
   --color-warning: #ff9500;
   --color-error: #ff3b30;
   --color-teal: #00b4b4;
-  --color-teal-light: #c5e8e8;
+  --color-teal-light: #e8f4f4;
+  --color-teal-dark: #009999;
   
   /* Text Colors */
   --color-text-primary: #1d1d1f;
   --color-text-secondary: #86868b;
   --color-text-tertiary: #aeaeb2;
   
-  /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.72);
-  --glass-border: rgba(255, 255, 255, 0.18);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  --blur-amount: 20px;
+  /* Card Styles */
+  --glass-bg: #ffffff;
+  --glass-border: rgba(0, 180, 180, 0.1);
+  --glass-shadow: 0 2px 12px rgba(0, 180, 180, 0.08);
+  --blur-amount: 0px;
+  
+  /* Sidebar */
+  --sidebar-bg: #00b4b4;
+  --sidebar-text: #ffffff;
+  --sidebar-active-bg: #ffffff;
+  --sidebar-active-text: #00b4b4;
   
   /* Spacing Scale (4px base) */
   --space-1: 4px;
@@ -114,7 +121,8 @@ body {
   min-height: 100vh;
   min-height: 100dvh; /* Dynamic viewport height for mobile */
   width: 100%;
-  background-color: var(--color-teal-light);
+  background-color: #e8f4f4;
+  background-image: linear-gradient(135deg, #e8f4f4 0%, #d4ebeb 100%);
   color: var(--color-text-primary);
   padding-top: var(--safe-area-top);
   padding-bottom: var(--safe-area-bottom);
@@ -124,15 +132,13 @@ body {
 
 @layer components {
   /* ==================
-     Glass Card (Apple Style)
+     Glass Card (Clean White Style)
      ================== */
   .glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--blur-amount));
-    -webkit-backdrop-filter: blur(var(--blur-amount));
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--glass-shadow);
+    background: #ffffff;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 180, 180, 0.06);
   }
   
   /* ==================
@@ -204,29 +210,38 @@ body {
     gap: 4px;
   }
   
-  .status-normal { @apply bg-teal-500 text-white; }
-  .status-testing { @apply bg-yellow-400 text-gray-800; }
-  .status-lost { @apply bg-orange-500 text-white; }
-  .status-damage { @apply bg-red-500 text-white; }
-  .status-scrap { @apply bg-gray-400 text-white; }
+  .status-normal { background: #00b4b4; @apply text-white; }
+  .status-testing { background: #fbbf24; @apply text-gray-800; }
+  .status-lost { background: #f97316; @apply text-white; }
+  .status-storage { background: #3b82f6; @apply text-white; }
+  .status-late { background: #f59e0b; @apply text-white; }
+  .status-damage { background: #ef4444; @apply text-white; }
+  .status-scrap { background: #9ca3af; @apply text-white; }
   
   /* ==================
-     Sidebar (Apple Style)
+     Sidebar (Solid Teal Style)
      ================== */
+  .sidebar {
+    background: #00b4b4;
+    color: white;
+  }
+  
   .sidebar-item {
     @apply flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer;
-    min-height: 44px; /* WCAG tap target */
+    min-height: 44px;
     transition: all var(--transition-fast);
+    color: rgba(255, 255, 255, 0.85);
   }
   
   .sidebar-item-active {
-    background: var(--color-teal);
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 180, 180, 0.3);
+    background: #ffffff;
+    color: #00b4b4;
+    box-shadow: none;
   }
   
   .sidebar-item:hover:not(.sidebar-item-active) {
-    background: rgba(0, 180, 180, 0.1);
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
   }
   
   /* ==================

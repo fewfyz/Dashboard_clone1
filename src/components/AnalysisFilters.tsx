@@ -15,9 +15,9 @@ function FilterTab({ label, subLabel, isActive, onClick }: FilterTabProps) {
     <button
       onClick={onClick}
       className={`min-h-[44px] px-4 sm:px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200
-        focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
+        focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00b4b4] focus-visible:ring-offset-2
         ${isActive
-          ? 'bg-gradient-to-r from-teal-400 to-teal-600 text-white shadow-lg shadow-teal-500/25'
+          ? 'bg-[#00b4b4] text-white'
           : 'bg-gray-100 text-gray-600 hover:bg-gray-200 active:bg-gray-300'
         }`}
     >
@@ -65,9 +65,9 @@ export default function AnalysisFilters() {
               role="tab"
               aria-selected={activeTab === tab}
               className={`min-h-[32px] px-3 sm:px-4 py-1.5 text-xs font-semibold rounded-full transition-all duration-200
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-primary
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00b4b4]
                 ${activeTab === tab
-                  ? 'bg-gradient-to-r from-teal-400 to-teal-600 text-white shadow-md'
+                  ? 'bg-[#00b4b4] text-white'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200 active:bg-gray-300'
                 }`}
             >

@@ -17,15 +17,15 @@ const menuItems = [
 
 export default function Sidebar({ activeItem, onItemClick }: SidebarProps) {
   return (
-    <div className="w-[220px] h-screen lg:h-full glass-card lg:rounded-3xl rounded-none p-5 flex flex-col">
+    <div className="w-[220px] h-screen lg:h-full bg-[#00b4b4] lg:rounded-3xl rounded-none p-5 flex flex-col">
       {/* Logo */}
       <div className="flex items-center gap-3 mb-2 px-2">
-        <div className="w-11 h-11 bg-gradient-to-br from-teal-400 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
+        <div className="w-11 h-11 bg-white/20 rounded-2xl flex items-center justify-center">
           <span className="text-white font-bold text-xl">⊗</span>
         </div>
       </div>
       
-      <div className="text-[11px] font-medium tracking-wider text-gray-400 uppercase px-2 mb-6">Dashboard</div>
+      <div className="text-[11px] font-medium tracking-wider text-white/60 uppercase px-2 mb-6">Dashboard</div>
       
       {/* Menu Items */}
       <nav className="flex-1 space-y-1">
@@ -37,7 +37,11 @@ export default function Sidebar({ activeItem, onItemClick }: SidebarProps) {
             <button
               key={item.id}
               onClick={() => onItemClick(item.id)}
-              className={`sidebar-item w-full mb-1 ${isActive ? 'sidebar-item-active' : 'text-gray-600'}`}
+              className={`sidebar-item w-full mb-1 ${
+                isActive 
+                  ? 'bg-white text-[#00b4b4] shadow-sm' 
+                  : 'text-white/85 hover:bg-white/15 hover:text-white'
+              }`}
               style={{ animationDelay: `${index * 50}ms` }}
               aria-current={isActive ? 'page' : undefined}
             >
@@ -53,18 +57,18 @@ export default function Sidebar({ activeItem, onItemClick }: SidebarProps) {
       </nav>
       
       {/* Bottom Icons */}
-      <div className="flex gap-2 justify-center pt-4 border-t border-gray-200/50">
+      <div className="flex gap-2 justify-center pt-4 border-t border-white/20">
         <button 
-          className="p-3 hover:bg-gray-100 rounded-xl transition-all duration-200 active:scale-95"
+          className="p-3 hover:bg-white/15 rounded-xl transition-all duration-200 active:scale-95"
           aria-label="Settings"
         >
-          <Settings size={20} className="text-gray-500" />
+          <Settings size={20} className="text-white/70" />
         </button>
         <button 
-          className="p-3 hover:bg-gray-100 rounded-xl transition-all duration-200 active:scale-95"
+          className="p-3 hover:bg-white/15 rounded-xl transition-all duration-200 active:scale-95"
           aria-label="Help"
         >
-          <HelpCircle size={20} className="text-gray-500" />
+          <HelpCircle size={20} className="text-white/70" />
         </button>
       </div>
     </div>

@@ -10,23 +10,19 @@ interface AlarmItemProps {
 
 const statusConfig = {
   normal: { 
-    bg: 'bg-gradient-to-r from-emerald-400 to-emerald-600', 
-    shadow: 'shadow-emerald-500/30',
+    bg: 'bg-[#00b4b4]', 
     text: 'NORMAL' 
   },
   hot: { 
-    bg: 'bg-gradient-to-r from-red-400 to-red-600', 
-    shadow: 'shadow-red-500/30',
+    bg: 'bg-[#ef4444]', 
     text: 'HOT' 
   },
   dry: { 
-    bg: 'bg-gradient-to-r from-amber-400 to-amber-600', 
-    shadow: 'shadow-amber-500/30',
+    bg: 'bg-[#fbbf24]', 
     text: 'DRY' 
   },
   open: { 
-    bg: 'bg-gradient-to-r from-orange-400 to-orange-600', 
-    shadow: 'shadow-orange-500/30',
+    bg: 'bg-[#f97316]', 
     text: 'OPEN' 
   },
 };
@@ -35,10 +31,10 @@ function AlarmItem({ number, status, isActive }: AlarmItemProps) {
   const config = statusConfig[status];
   return (
     <div className={`flex flex-col items-center gap-1.5 sm:gap-2 p-2 sm:p-3 rounded-xl transition-all duration-200
-      ${isActive ? 'bg-gray-100/80 ring-2 ring-teal-400/50' : 'hover:bg-gray-50'}`}>
+      ${isActive ? 'bg-gray-100/80 ring-2 ring-[#00b4b4]/50' : 'hover:bg-gray-50'}`}>
       <span className="text-[10px] sm:text-xs text-gray-600 font-semibold">{number}</span>
       <span className={`${config.bg} text-white text-[9px] sm:text-[10px] px-2 sm:px-2.5 py-0.5 sm:py-1 
-        rounded-full font-semibold shadow-md ${config.shadow}`}>
+        rounded-full font-semibold`}>
         {config.text}
       </span>
     </div>

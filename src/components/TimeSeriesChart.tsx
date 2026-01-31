@@ -51,7 +51,7 @@ export default function TimeSeriesChart() {
 
   return (
     <div className="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 animate-fade-in">
-      <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-teal-600 mb-4 sm:mb-6 tracking-tight">Time Series Chart</h2>
+      <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#00b4b4] mb-4 sm:mb-6 tracking-tight">Time Series Chart</h2>
       
       <div className="overflow-x-auto -mx-2 px-2">
         <svg width={chartWidth} height={chartHeight} className="min-w-[600px]">
