@@ -9,18 +9,36 @@ interface AlarmItemProps {
 }
 
 const statusConfig = {
-  normal: { bg: 'bg-teal-500', text: 'NORMAL' },
-  hot: { bg: 'bg-red-500', text: 'HOT' },
-  dry: { bg: 'bg-yellow-500', text: 'DRY' },
-  open: { bg: 'bg-orange-500', text: 'OPEN' },
+  normal: { 
+    bg: 'bg-gradient-to-r from-emerald-400 to-emerald-600', 
+    shadow: 'shadow-emerald-500/30',
+    text: 'NORMAL' 
+  },
+  hot: { 
+    bg: 'bg-gradient-to-r from-red-400 to-red-600', 
+    shadow: 'shadow-red-500/30',
+    text: 'HOT' 
+  },
+  dry: { 
+    bg: 'bg-gradient-to-r from-amber-400 to-amber-600', 
+    shadow: 'shadow-amber-500/30',
+    text: 'DRY' 
+  },
+  open: { 
+    bg: 'bg-gradient-to-r from-orange-400 to-orange-600', 
+    shadow: 'shadow-orange-500/30',
+    text: 'OPEN' 
+  },
 };
 
 function AlarmItem({ number, status, isActive }: AlarmItemProps) {
   const config = statusConfig[status];
   return (
-    <div className={`flex flex-col items-center gap-1 p-2 rounded-xl ${isActive ? 'bg-gray-100' : ''}`}>
-      <span className="text-xs text-gray-600 font-medium">{number}</span>
-      <span className={`${config.bg} text-white text-[10px] px-2 py-0.5 rounded-full font-medium`}>
+    <div className={`flex flex-col items-center gap-1.5 sm:gap-2 p-2 sm:p-3 rounded-xl transition-all duration-200
+      ${isActive ? 'bg-gray-100/80 ring-2 ring-teal-400/50' : 'hover:bg-gray-50'}`}>
+      <span className="text-[10px] sm:text-xs text-gray-600 font-semibold">{number}</span>
+      <span className={`${config.bg} text-white text-[9px] sm:text-[10px] px-2 sm:px-2.5 py-0.5 sm:py-1 
+        rounded-full font-semibold shadow-md ${config.shadow}`}>
         {config.text}
       </span>
     </div>
@@ -38,9 +56,9 @@ export default function AlarmStatus() {
   ];
 
   return (
-    <div className="bg-white rounded-2xl p-4 shadow-sm">
-      <h3 className="text-sm font-semibold text-gray-800 mb-3">ALARM</h3>
-      <div className="grid grid-cols-6 gap-1">
+    <div className="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 lg:p-6 animate-fade-in">
+      <h3 className="text-sm font-semibold text-gray-800 mb-3 sm:mb-4 tracking-wide">ALARM</h3>
+      <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5 sm:gap-2">
         {alarms.map((alarm, index) => (
           <AlarmItem
             key={alarm.number}

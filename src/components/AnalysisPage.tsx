@@ -3,18 +3,28 @@
 import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import Header from '@/components/Header';
-import SensorControls from '@/components/SensorControls';
-import LocationMap from '@/components/LocationMap';
-import AlarmStatus from '@/components/AlarmStatus';
-import MonitoringChart from '@/components/MonitoringChart';
-import EquipmentChart from '@/components/EquipmentChart';
-import AllItemsList from '@/components/AllItemsList';
+import AnalysisFilters from '@/components/AnalysisFilters';
+import TimeSeriesChart from '@/components/TimeSeriesChart';
+import StorageBoxMini from '@/components/StorageBoxMini';
 
-interface MonitorPageProps {
+interface AnalysisPageProps {
   onNavigate: (page: string) => void;
 }
 
-export default function MonitorPage({ onNavigate }: MonitorPageProps) {
+const storageBox2Data = {
+  total: 20,
+  delay: 0,
+  detection: 0,
+  scrap: 0,
+  humidity: 38,
+  temperature: 28,
+  normalCount: 18,
+  testingCount: 1,
+  doorStatus: 'off' as const,
+  lightStatus: 'on' as const,
+};
+
+export default function AnalysisPage({ onNavigate }: AnalysisPageProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -34,7 +44,7 @@ export default function MonitorPage({ onNavigate }: MonitorPageProps) {
       {/* Sidebar */}
       <aside className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 fixed lg:relative z-40 transition-transform duration-300 ease-out`}>
         <Sidebar 
-          activeItem="monitor" 
+          activeItem="analysis" 
           onItemClick={(item) => { 
             onNavigate(item); 
             setSidebarOpen(false); 
@@ -56,33 +66,18 @@ export default function MonitorPage({ onNavigate }: MonitorPageProps) {
         {/* Header */}
         <Header />
         
-        {/* Monitor Content */}
+        {/* Analysis Content */}
         <div className="flex-1 overflow-y-auto px-1 sm:px-2 pb-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5">
-            {/* Left Column */}
-            <div className="flex flex-col gap-4 lg:gap-5">
-              {/* Sensor Controls */}
-              <SensorControls />
-              
-              {/* Charts Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-5">
-                <MonitoringChart />
-                <EquipmentChart />
-              </div>
-            </div>
-            
-            {/* Right Column */}
-            <div className="flex flex-col gap-4 lg:gap-5">
-              {/* Location Map */}
-              <LocationMap />
-              
-              {/* Alarm Status */}
-              <AlarmStatus />
-              
-              {/* All Items List */}
-              <AllItemsList />
-            </div>
+          {/* Filter Tabs */}
+          <AnalysisFilters />
+          
+          {/* Time Series Chart */}
+          <div className="mb-4 lg:mb-5">
+            <TimeSeriesChart />
           </div>
+          
+          {/* Storage Box Mini */}
+          <StorageBoxMini boxNumber={2} data={storageBox2Data} />
         </div>
       </main>
     </div>

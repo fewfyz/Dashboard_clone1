@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { RefreshCw, ChevronRight } from 'lucide-react';
 import ItemCard from './ItemCard';
 
 interface CaseSectionProps {
@@ -29,77 +28,60 @@ interface CaseSectionProps {
   }>;
 }
 
+const sections = [
+  { key: 'shaft', label: 'Shaft', color: 'bg-teal-500' },
+  { key: 'capacitive', label: 'Capacitive', color: 'bg-yellow-400' },
+  { key: 'blanket', label: 'Insulating blanket', color: 'bg-orange-400' },
+];
+
 export default function CaseSection({ caseNumber, shaftItems, capacitiveItems, blanketItems }: CaseSectionProps) {
+  const itemsMap = {
+    shaft: shaftItems,
+    capacitive: capacitiveItems,
+    blanket: blanketItems,
+  };
+
   return (
-    <div className="card">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-bold text-gray-800">CASE {caseNumber}</h3>
+    <div className="glass-card p-5 animate-fade-in" style={{ animationDelay: '50ms' }}>
+      <div className="flex items-center justify-between mb-5">
+        <h3 className="text-lg font-semibold text-gray-800 tracking-tight">CASE {caseNumber}</h3>
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        {/* Shaft Section */}
-        <div>
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-2 h-2 bg-teal-500 rounded-full"></div>
-            <span className="font-semibold text-gray-700">Shaft</span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {sections.map((section) => (
+          <div key={section.key}>
+            <div className="flex items-center gap-2.5 mb-3">
+              <div className={`w-2.5 h-2.5 ${section.color} rounded-full shadow-sm`}></div>
+              <span className="font-semibold text-gray-700 text-sm">{section.label}</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {itemsMap[section.key as keyof typeof itemsMap].map((item) => (
+                <ItemCard
+                  key={item.id}
+                  name={item.name}
+                  status={item.status}
+                  statusType={item.statusType}
+                  count={item.count}
+                />
+              ))}
+            </div>
           </div>
-          <div className="grid grid-cols-2 gap-2">
-            {shaftItems.map((item) => (
-              <ItemCard
-                key={item.id}
-                name={item.name}
-                status={item.status}
-                statusType={item.statusType}
-                count={item.count}
-              />
-            ))}
-          </div>
-        </div>
-        
-        {/* Capacitive Section */}
-        <div>
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-            <span className="font-semibold text-gray-700">Capacitive</span>
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            {capacitiveItems.map((item) => (
-              <ItemCard
-                key={item.id}
-                name={item.name}
-                status={item.status}
-                statusType={item.statusType}
-                count={item.count}
-              />
-            ))}
-          </div>
-        </div>
-        
-        {/* Insulating Blanket Section */}
-        <div>
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-            <span className="font-semibold text-gray-700">Insulating blanket</span>
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            {blanketItems.map((item) => (
-              <ItemCard
-                key={item.id}
-                name={item.name}
-                status={item.status}
-                statusType={item.statusType}
-                count={item.count}
-              />
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
       
-      {/* Pagination Dots */}
-      <div className="flex justify-center gap-2 mt-4">
-        <div className="w-2 h-2 bg-teal-500 rounded-full"></div>
-        <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-        <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+      {/* Pagination Dots - iOS Style */}
+      <div className="flex justify-center gap-2 mt-5">
+        {[0, 1, 2].map((dot) => (
+          <button
+            key={dot}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              dot === 0 
+                ? 'bg-teal-500 w-6' 
+                : 'bg-gray-300 hover:bg-gray-400'
+            }`}
+            aria-label={`Page ${dot + 1}`}
+          />
+        ))}
       </div>
     </div>
   );

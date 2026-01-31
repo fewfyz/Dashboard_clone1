@@ -17,42 +17,53 @@ const menuItems = [
 
 export default function Sidebar({ activeItem, onItemClick }: SidebarProps) {
   return (
-    <div className="w-[200px] sm:w-[220px] h-screen lg:h-full bg-[#f0fafa] rounded-none lg:rounded-3xl p-4 flex flex-col shadow-lg">
+    <div className="w-[220px] h-screen lg:h-full glass-card lg:rounded-3xl rounded-none p-5 flex flex-col">
       {/* Logo */}
-      <div className="flex items-center gap-2 mb-2 px-2">
-        <div className="w-10 h-10 bg-teal-500 rounded-full flex items-center justify-center">
-          <span className="text-white font-bold text-lg">⊗</span>
+      <div className="flex items-center gap-3 mb-2 px-2">
+        <div className="w-11 h-11 bg-gradient-to-br from-teal-400 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
+          <span className="text-white font-bold text-xl">⊗</span>
         </div>
       </div>
       
-      <div className="text-xs text-gray-400 px-2 mb-6">DASHBOARD</div>
+      <div className="text-[11px] font-medium tracking-wider text-gray-400 uppercase px-2 mb-6">Dashboard</div>
       
       {/* Menu Items */}
-      <nav className="flex-1">
-        {menuItems.map((item) => {
+      <nav className="flex-1 space-y-1">
+        {menuItems.map((item, index) => {
           const Icon = item.icon;
           const isActive = activeItem === item.id;
           
           return (
-            <div
+            <button
               key={item.id}
               onClick={() => onItemClick(item.id)}
-              className={`sidebar-item mb-2 ${isActive ? 'sidebar-item-active' : 'text-gray-600'}`}
+              className={`sidebar-item w-full mb-1 ${isActive ? 'sidebar-item-active' : 'text-gray-600'}`}
+              style={{ animationDelay: `${index * 50}ms` }}
+              aria-current={isActive ? 'page' : undefined}
             >
-              <Icon size={20} />
-              <span className="flex-1 font-medium">{item.label}</span>
-              <ChevronRight size={16} className={isActive ? 'opacity-100' : 'opacity-0'} />
-            </div>
+              <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
+              <span className="flex-1 font-medium text-[15px] text-left">{item.label}</span>
+              <ChevronRight 
+                size={16} 
+                className={`transition-opacity duration-200 ${isActive ? 'opacity-100' : 'opacity-0'}`} 
+              />
+            </button>
           );
         })}
       </nav>
       
       {/* Bottom Icons */}
-      <div className="flex gap-4 justify-center pt-4 border-t border-gray-200">
-        <button className="p-2 hover:bg-teal-100 rounded-lg transition-colors">
+      <div className="flex gap-2 justify-center pt-4 border-t border-gray-200/50">
+        <button 
+          className="p-3 hover:bg-gray-100 rounded-xl transition-all duration-200 active:scale-95"
+          aria-label="Settings"
+        >
           <Settings size={20} className="text-gray-500" />
         </button>
-        <button className="p-2 hover:bg-teal-100 rounded-lg transition-colors">
+        <button 
+          className="p-3 hover:bg-gray-100 rounded-xl transition-all duration-200 active:scale-95"
+          aria-label="Help"
+        >
           <HelpCircle size={20} className="text-gray-500" />
         </button>
       </div>

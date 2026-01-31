@@ -5,6 +5,7 @@ import { Droplets, Thermometer } from 'lucide-react';
 
 export default function Header() {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -29,33 +30,54 @@ export default function Header() {
   };
 
   return (
-    <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-6 py-4 px-4 sm:px-8">
+    <header className="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-5 py-4 px-4 sm:px-6">
       {/* Time */}
-      <div className="text-gray-700 font-semibold text-base sm:text-lg">
-        {formatTime(currentTime)}
+      <div className="flex items-center gap-2">
+        <span className="text-gray-800 font-semibold text-base sm:text-lg tracking-tight">
+          {formatTime(currentTime)}
+        </span>
       </div>
       
       {/* Date */}
-      <div className="text-gray-600 text-sm sm:text-base">
+      <div className="text-gray-500 text-sm sm:text-base font-medium">
         {formatDate(currentTime)}
       </div>
       
+      {/* Divider */}
+      <div className="hidden sm:block w-px h-6 bg-gray-300"></div>
+      
       {/* Humidity */}
-      <div className="flex items-center gap-1 text-gray-600 text-sm sm:text-base">
-        <Droplets size={18} className="text-teal-500" />
-        <span>63%</span>
+      <div className="flex items-center gap-1.5 text-gray-600">
+        <div className="p-1.5 bg-teal-50 rounded-lg">
+          <Droplets size={16} className="text-teal-500" />
+        </div>
+        <span className="text-sm font-medium">63%</span>
       </div>
       
       {/* Temperature */}
-      <div className="flex items-center gap-1 text-gray-600 text-sm sm:text-base">
-        <Thermometer size={18} className="text-orange-400" />
-        <span>26°C</span>
+      <div className="flex items-center gap-1.5 text-gray-600">
+        <div className="p-1.5 bg-orange-50 rounded-lg">
+          <Thermometer size={16} className="text-orange-400" />
+        </div>
+        <span className="text-sm font-medium">26°C</span>
       </div>
       
-      {/* Toggle */}
-      <div className="w-12 sm:w-14 h-6 sm:h-7 bg-teal-500 rounded-full p-1 cursor-pointer">
-        <div className="w-4 sm:w-5 h-4 sm:h-5 bg-white rounded-full ml-auto shadow-md"></div>
-      </div>
-    </div>
+      {/* Dark Mode Toggle (iOS Style) */}
+      <button
+        onClick={() => setIsDarkMode(!isDarkMode)}
+        className={`relative w-14 h-8 rounded-full transition-colors duration-300 ${
+          isDarkMode ? 'bg-teal-500' : 'bg-gray-300'
+        }`}
+        role="switch"
+        aria-checked={isDarkMode}
+        aria-label="Toggle dark mode"
+      >
+        <div 
+          className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-md transition-transform duration-300 ${
+            isDarkMode ? 'translate-x-7' : 'translate-x-1'
+          }`}
+        />
+      </button>
+    </header>
   );
 }
