@@ -17,7 +17,7 @@ const menuItems = [
 
 export default function Sidebar({ activeItem, onItemClick }: SidebarProps) {
   return (
-    <div className="w-[180px] sm:w-[200px] lg:w-[220px] xl:w-[240px] h-screen lg:h-full bg-[#00b4b4] lg:rounded-2xl xl:rounded-3xl rounded-none p-3 sm:p-4 lg:p-5 flex flex-col">
+    <div className="w-[180px] sm:w-[200px] lg:w-[220px] xl:w-[240px] h-screen lg:h-[calc(100vh-2rem)] xl:h-[calc(100vh-2.5rem)] bg-[#00b4b4] lg:rounded-2xl xl:rounded-3xl rounded-none p-3 sm:p-4 lg:p-5 flex flex-col">
       {/* Logo */}
       <div className="flex items-center gap-2 sm:gap-3 mb-1 sm:mb-2 px-1 sm:px-2">
         <div className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 bg-white/20 rounded-xl sm:rounded-2xl flex items-center justify-center">

@@ -18,7 +18,7 @@ export default function MonitorPage({ onNavigate }: MonitorPageProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen min-h-[100dvh] w-full bg-gradient-to-br from-[#e8f4f4] to-[#d4ebeb] p-1.5 sm:p-2 md:p-3 lg:p-4 xl:p-5 flex flex-col lg:flex-row">
+    <div className="h-screen w-full bg-gradient-to-br from-[#e8f4f4] to-[#d4ebeb] p-2 sm:p-3 lg:p-4 xl:p-5 flex flex-col lg:flex-row overflow-hidden">
       {/* Mobile Menu Button - Apple Style */}
       <button 
         className="lg:hidden fixed top-3 left-3 z-50 bg-white/80 backdrop-blur-xl text-gray-800 p-2.5 sm:p-3 rounded-xl sm:rounded-2xl shadow-lg 
@@ -52,27 +52,27 @@ export default function MonitorPage({ onNavigate }: MonitorPageProps) {
       )}
       
       {/* Main Content */}
-      <main className="flex-1 lg:ml-3 xl:ml-4 2xl:ml-5 flex flex-col overflow-hidden mt-14 sm:mt-16 lg:mt-0">
+      <main className="flex-1 lg:ml-3 xl:ml-4 flex flex-col min-h-0 mt-14 sm:mt-16 lg:mt-0">
         {/* Header */}
         <Header />
         
         {/* Monitor Content */}
-        <div className="flex-1 overflow-y-auto px-0.5 sm:px-1 lg:px-2 pb-4 sm:pb-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-3 lg:gap-4 xl:gap-5">
+        <div className="flex-1 overflow-y-auto px-0.5 sm:px-1 lg:px-2 pb-2 sm:pb-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-3 lg:gap-4 h-full">
             {/* Left Column */}
-            <div className="flex flex-col gap-2 sm:gap-3 lg:gap-4 xl:gap-5">
+            <div className="flex flex-col gap-2 sm:gap-3 lg:gap-4">
               {/* Sensor Controls */}
               <SensorControls />
               
               {/* Charts Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 lg:gap-4 xl:gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 lg:gap-4 flex-1">
                 <MonitoringChart />
                 <EquipmentChart />
               </div>
             </div>
             
             {/* Right Column */}
-            <div className="flex flex-col gap-2 sm:gap-3 lg:gap-4 xl:gap-5">
+            <div className="flex flex-col gap-2 sm:gap-3 lg:gap-4">
               {/* Location Map */}
               <LocationMap />
               
