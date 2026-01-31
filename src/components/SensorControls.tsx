@@ -124,7 +124,7 @@ export default function SensorControls() {
                 aria-selected={activeTab === tab}
                 className={`min-h-[32px] px-3 sm:px-4 py-1.5 text-xs font-semibold rounded-full transition-all duration-200
                   ${activeTab === tab
-                    ? 'bg-gradient-to-r from-teal-400 to-teal-600 text-white shadow-md'
+                    ? 'bg-[#00b4b4] text-white shadow-md'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200 active:bg-gray-300'
                   }`}
               >
@@ -185,7 +185,7 @@ export default function SensorControls() {
               onClick={() => setHeaterOn(!heaterOn)}
               className={`ml-auto min-h-[28px] px-3 py-1 rounded-full text-xs font-semibold transition-all duration-200
                 ${heaterOn 
-                  ? 'bg-gradient-to-r from-teal-400 to-teal-600 text-white shadow-sm' 
+                  ? 'bg-[#00b4b4] text-white shadow-sm' 
                   : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}
             >
               {heaterOn ? 'ON' : 'OFF'}
@@ -250,7 +250,7 @@ export default function SensorControls() {
             onClick={() => setDehumidifierOn(!dehumidifierOn)}
             className={`ml-auto min-h-[28px] px-3 py-1 rounded-full text-xs font-semibold transition-all duration-200
               ${dehumidifierOn 
-                ? 'bg-gradient-to-r from-teal-400 to-teal-600 text-white shadow-sm' 
+                ? 'bg-[#00b4b4] text-white shadow-sm' 
                 : 'bg-gray-200 text-gray-500 hover:bg-gray-300'}`}
           >
             {dehumidifierOn ? 'ON' : 'OFF'}
