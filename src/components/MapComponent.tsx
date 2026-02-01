@@ -22,13 +22,15 @@ interface MapComponentProps {
   longitude: number;
   zoom?: number;
   markerTitle?: string;
+  mapType?: 'street' | 'satellite';
 }
 
 export default function MapComponent({ 
   latitude, 
   longitude, 
   zoom = 15,
-  markerTitle = "Dam Location"
+  markerTitle = "Dam Location",
+  mapType = 'street'
 }: MapComponentProps) {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -52,10 +54,18 @@ export default function MapComponent({
       style={{ height: '100%', width: '100%', borderRadius: 'inherit' }}
       zoomControl={false}
     >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+      {mapType === 'satellite' ? (
+        <TileLayer
+          attribution='&copy; <a href="https://www.google.com/maps">Google Maps</a>'
+          url="https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+          maxZoom={20}
+        />
+      ) : (
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+      )}
       <Marker position={[latitude, longitude]} icon={customIcon}>
         <Popup>
           <div className="font-semibold text-[#00b4b4]">{markerTitle}</div>

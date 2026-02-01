@@ -50,13 +50,14 @@ export default function LocationMap() {
       </div>
 
       {/* Map Area */}
-      <div className="relative flex-1 min-h-[360px] sm:min-h-[420px] lg:min-h-[480px] bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50 rounded-xl sm:rounded-2xl mb-2 sm:mb-3 overflow-hidden shadow-inner">
+      <div className="relative flex-1 min-h-[480px] sm:min-h-[560px] lg:min-h-[640px] bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50 rounded-xl sm:rounded-2xl mb-2 sm:mb-3 overflow-hidden shadow-inner">
         {mapEnabled ? (
           <MapComponent
             latitude={DAM_LOCATION.latitude}
             longitude={DAM_LOCATION.longitude}
             zoom={14}
             markerTitle={DAM_LOCATION.name}
+            mapType={activeView === 'geometry' ? 'satellite' : 'street'}
           />
         ) : (
           <>
