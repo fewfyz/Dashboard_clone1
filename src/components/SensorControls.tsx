@@ -96,8 +96,10 @@ function ValueControl({ label, value, unit, icon, onIncrease, onDecrease, isOn, 
   );
 }
 
+type SensorId = 'NO.1' | 'NO.2' | 'NO.3' | 'NO.4' | 'NO.5' | 'NO.6';
+
 export default function SensorControls() {
-  const [activeTab, setActiveTab] = useState('NO.2');
+  const [activeTab, setActiveTab] = useState<SensorId>('NO.2');
   
   // Each sensor has its own state
   const [sensorStates, setSensorStates] = useState({
