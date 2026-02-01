@@ -1,5 +1,5 @@
 import React from 'react';
-import AlarmStatus from './components/AlarmStatus';
+
 
 export default function Dashboard() {
   return (
