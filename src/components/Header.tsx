@@ -5,7 +5,6 @@ import { Droplets, Thermometer } from 'lucide-react';
 
 export default function Header() {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -61,23 +60,6 @@ export default function Header() {
         </div>
         <span className="text-sm font-semibold text-gray-700 tabular-nums">26°C</span>
       </div>
-      
-      {/* Dark Mode Toggle (iOS Style) */}
-      <button
-        onClick={() => setIsDarkMode(!isDarkMode)}
-        className={`relative w-12 h-7 rounded-full transition-all duration-300 shadow-inner ${
-          isDarkMode ? 'bg-gradient-to-r from-teal-500 to-cyan-500' : 'bg-gray-300'
-        }`}
-        role="switch"
-        aria-checked={isDarkMode}
-        aria-label="Toggle dark mode"
-      >
-        <div 
-          className={`absolute top-0.5 w-6 h-6 bg-white rounded-full shadow-lg transition-all duration-300 ${
-            isDarkMode ? 'translate-x-5' : 'translate-x-0.5'
-          }`}
-        />
-      </button>
     </header>
   );
 }
