@@ -3,10 +3,6 @@
 import React, { useState } from 'react';
 import { Lightbulb, DoorOpen, MapPin, Bell, Flame, Droplets, Plus, Minus } from 'lucide-react';
 
-interface SensorControlsProps {
-  onSensorClick?: (sensorNumber: string) => void;
-}
-
 interface ToggleButtonProps {
   label: string;
   icon: React.ReactNode;
@@ -100,16 +96,32 @@ function ValueControl({ label, value, unit, icon, onIncrease, onDecrease, isOn, 
   );
 }
 
-export default function SensorControls({ onSensorClick }: SensorControlsProps = {}) {
+export default function SensorControls() {
   const [activeTab, setActiveTab] = useState('NO.2');
-  const [light, setLight] = useState(false);
-  const [door, setDoor] = useState(true);
-  const [guidingLamp, setGuidingLamp] = useState(false);
-  const [alarm, setAlarm] = useState(false);
-  const [heaterOn, setHeaterOn] = useState(true);
-  const [heaterTemp, setHeaterTemp] = useState(25);
-  const [dehumidifierOn, setDehumidifierOn] = useState(true);
-  const [humidity, setHumidity] = useState(40);
+  
+  // Each sensor has its own state
+  const [sensorStates, setSensorStates] = useState({
+    'NO.1': { light: true, door: false, guidingLamp: false, alarm: false, heaterOn: true, heaterTemp: 25, dehumidifierOn: true, humidity: 40 },
+    'NO.2': { light: false, door: true, guidingLamp: false, alarm: false, heaterOn: true, heaterTemp: 25, dehumidifierOn: true, humidity: 40 },
+    'NO.3': { light: false, door: false, guidingLamp: true, alarm: false, heaterOn: false, heaterTemp: 20, dehumidifierOn: false, humidity: 50 },
+    'NO.4': { light: false, door: false, guidingLamp: false, alarm: true, heaterOn: true, heaterTemp: 30, dehumidifierOn: true, humidity: 35 },
+    'NO.5': { light: true, door: true, guidingLamp: false, alarm: false, heaterOn: false, heaterTemp: 22, dehumidifierOn: true, humidity: 45 },
+    'NO.6': { light: false, door: false, guidingLamp: false, alarm: false, heaterOn: true, heaterTemp: 28, dehumidifierOn: false, humidity: 55 },
+  });
+
+  // Get current sensor state
+  const currentState = sensorStates[activeTab];
+
+  // Update functions for current sensor
+  const updateSensorState = (key: string, value: any) => {
+    setSensorStates(prev => ({
+      ...prev,
+      [activeTab]: {
+        ...prev[activeTab],
+        [key]: value
+      }
+    }));
+  };
 
   const tabs = ['NO.1', 'NO.2', 'NO.3', 'NO.4', 'NO.5', 'NO.6'];
 
@@ -123,12 +135,7 @@ export default function SensorControls({ onSensorClick }: SensorControlsProps = 
             {tabs.map((tab) => (
               <button
                 key={tab}
-                onClick={() => {
-                  setActiveTab(tab);
-                  if (onSensorClick) {
-                    onSensorClick(tab);
-                  }
-                }}
+                onClick={() => setActiveTab(tab)}
                 role="tab"
                 aria-selected={activeTab === tab}
                 className={`min-h-[28px] sm:min-h-[32px] px-2.5 sm:px-3 lg:px-4 py-1 sm:py-1.5 text-[10px] sm:text-xs font-semibold rounded-full transition-all duration-200
@@ -157,26 +164,26 @@ export default function SensorControls({ onSensorClick }: SensorControlsProps = 
         <ToggleButton
           label="Light"
           icon={<Lightbulb size={14} className="sm:w-4 sm:h-4 lg:w-[18px] lg:h-[18px]" />}
-          isOn={light}
-          onToggle={() => setLight(!light)}
+          isOn={currentState.light}
+          onToggle={() => updateSensorState('light', !currentState.light)}
         />
         <ToggleButton
           label="Door"
           icon={<DoorOpen size={14} className="sm:w-4 sm:h-4 lg:w-[18px] lg:h-[18px]" />}
-          isOn={door}
-          onToggle={() => setDoor(!door)}
+          isOn={currentState.door}
+          onToggle={() => updateSensorState('door', !currentState.door)}
         />
         <ToggleButton
           label="Guiding Lamp"
           icon={<MapPin size={14} className="sm:w-4 sm:h-4 lg:w-[18px] lg:h-[18px]" />}
-          isOn={guidingLamp}
-          onToggle={() => setGuidingLamp(!guidingLamp)}
+          isOn={currentState.guidingLamp}
+          onToggle={() => updateSensorState('guidingLamp', !currentState.guidingLamp)}
         />
         <ToggleButton
           label="Alarm"
           icon={<Bell size={14} className="sm:w-4 sm:h-4 lg:w-[18px] lg:h-[18px]" />}
-          isOn={alarm}
-          onToggle={() => setAlarm(!alarm)}
+          isOn={currentState.alarm}
+          onToggle={() => updateSensorState('alarm', !currentState.alarm)}
         />
       </div>
 
@@ -191,22 +198,22 @@ export default function SensorControls({ onSensorClick }: SensorControlsProps = 
               <span className="text-red-400">🔥</span>
             </div>
             <button
-              onClick={() => setHeaterOn(!heaterOn)}
+              onClick={() => updateSensorState('heaterOn', !currentState.heaterOn)}
               className={`ml-auto min-h-[24px] sm:min-h-[28px] px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold transition-all duration-200
-                ${heaterOn 
+                ${currentState.heaterOn 
                   ? 'bg-[#00b4b4] text-white shadow-sm' 
                   : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}
             >
-              {heaterOn ? 'ON' : 'OFF'}
+              {currentState.heaterOn ? 'ON' : 'OFF'}
             </button>
           </div>
           <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
             <Flame size={22} className="sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-teal-500" />
-            <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 tracking-tight">{heaterTemp}</span>
+            <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 tracking-tight">{currentState.heaterTemp}</span>
             <span className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-400">°C</span>
             <div className="flex items-center gap-1.5 sm:gap-2 ml-auto">
               <button
-                onClick={() => setHeaterTemp(heaterTemp + 1)}
+                onClick={() => updateSensorState('heaterTemp', currentState.heaterTemp + 1)}
                 className="w-8 h-8 sm:w-10 sm:h-10 lg:w-11 lg:h-11 bg-gray-50 hover:bg-gray-100 active:bg-gray-200 
                   rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-150
                   focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
@@ -215,7 +222,7 @@ export default function SensorControls({ onSensorClick }: SensorControlsProps = 
                 <Plus size={16} className="sm:w-[18px] sm:h-[18px] text-gray-600" />
               </button>
               <button
-                onClick={() => setHeaterTemp(Math.max(0, heaterTemp - 1))}
+                onClick={() => updateSensorState('heaterTemp', Math.max(0, currentState.heaterTemp - 1))}
                 className="w-8 h-8 sm:w-10 sm:h-10 lg:w-11 lg:h-11 bg-gray-50 hover:bg-gray-100 active:bg-gray-200 
                   rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-150
                   focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
@@ -256,22 +263,22 @@ export default function SensorControls({ onSensorClick }: SensorControlsProps = 
         <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
           <span className="text-[10px] sm:text-[11px] lg:text-xs font-medium text-gray-500 uppercase tracking-wide">Dehumidifier</span>
           <button
-            onClick={() => setDehumidifierOn(!dehumidifierOn)}
+            onClick={() => updateSensorState('dehumidifierOn', !currentState.dehumidifierOn)}
             className={`ml-auto min-h-[24px] sm:min-h-[28px] px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold transition-all duration-200
-              ${dehumidifierOn 
+              ${currentState.dehumidifierOn 
                 ? 'bg-[#00b4b4] text-white shadow-sm' 
                 : 'bg-gray-200 text-gray-500 hover:bg-gray-300'}`}
           >
-            {dehumidifierOn ? 'ON' : 'OFF'}
+            {currentState.dehumidifierOn ? 'ON' : 'OFF'}
           </button>
         </div>
         <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
           <Droplets size={22} className="sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-teal-500" />
-          <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 tracking-tight">{humidity}</span>
+          <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 tracking-tight">{currentState.humidity}</span>
           <span className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-400">%</span>
           <div className="flex items-center gap-1.5 sm:gap-2 ml-auto">
             <button
-              onClick={() => setHumidity(Math.min(100, humidity + 1))}
+              onClick={() => updateSensorState('humidity', Math.min(100, currentState.humidity + 1))}
               className="w-8 h-8 sm:w-10 sm:h-10 lg:w-11 lg:h-11 bg-white hover:bg-gray-50 active:bg-gray-100 
                 rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-150 shadow-sm border border-gray-100
                 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
@@ -280,7 +287,7 @@ export default function SensorControls({ onSensorClick }: SensorControlsProps = 
               <Plus size={16} className="sm:w-[18px] sm:h-[18px] text-gray-600" />
             </button>
             <button
-              onClick={() => setHumidity(Math.max(0, humidity - 1))}
+              onClick={() => updateSensorState('humidity', Math.max(0, currentState.humidity - 1))}
               className="w-8 h-8 sm:w-10 sm:h-10 lg:w-11 lg:h-11 bg-white hover:bg-gray-50 active:bg-gray-100 
                 rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-150 shadow-sm border border-gray-100
                 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
