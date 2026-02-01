@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import Header from '@/components/Header';
-import SensorControls from '@/components/SensorControls';
+import SensorControls, { type SensorId, type SensorState } from '@/components/SensorControls';
 import LocationMap from '@/components/LocationMap';
 import AlarmStatus from '@/components/AlarmStatus';
 import MonitoringChart from '@/components/MonitoringChart';
@@ -16,6 +16,53 @@ interface MonitorPageProps {
 
 export default function MonitorPage({ onNavigate }: MonitorPageProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<SensorId>('NO.2');
+  
+  // Each sensor has its own state including GPS coordinates
+  const [sensorStates, setSensorStates] = useState<Record<SensorId, SensorState>>({
+    'NO.1': { 
+      light: true, door: false, guidingLamp: false, alarm: false, 
+      heaterOn: true, heaterTemp: 25, dehumidifierOn: true, humidity: 40,
+      latitude: 14.4426, longitude: 101.3705, mapView: 'street'
+    },
+    'NO.2': { 
+      light: false, door: true, guidingLamp: false, alarm: false, 
+      heaterOn: true, heaterTemp: 25, dehumidifierOn: true, humidity: 40,
+      latitude: 14.4450, longitude: 101.3730, mapView: 'street'
+    },
+    'NO.3': { 
+      light: false, door: false, guidingLamp: true, alarm: false, 
+      heaterOn: false, heaterTemp: 20, dehumidifierOn: false, humidity: 50,
+      latitude: 14.4400, longitude: 101.3680, mapView: 'street'
+    },
+    'NO.4': { 
+      light: false, door: false, guidingLamp: false, alarm: true, 
+      heaterOn: true, heaterTemp: 30, dehumidifierOn: true, humidity: 35,
+      latitude: 14.4480, longitude: 101.3750, mapView: 'street'
+    },
+    'NO.5': { 
+      light: true, door: true, guidingLamp: false, alarm: false, 
+      heaterOn: false, heaterTemp: 22, dehumidifierOn: true, humidity: 45,
+      latitude: 14.4380, longitude: 101.3660, mapView: 'street'
+    },
+    'NO.6': { 
+      light: false, door: false, guidingLamp: false, alarm: false, 
+      heaterOn: true, heaterTemp: 28, dehumidifierOn: false, humidity: 55,
+      latitude: 14.4510, longitude: 101.3780, mapView: 'street'
+    },
+  });
+
+  const currentState = sensorStates[activeTab];
+
+  const handleMapViewChange = (view: 'street' | 'satellite') => {
+    setSensorStates(prev => ({
+      ...prev,
+      [activeTab]: {
+        ...prev[activeTab],
+        mapView: view
+      }
+    }));
+  };
 
   return (
     <div className="h-screen w-full bg-gradient-to-br from-[#e8f4f4] to-[#d4ebeb] p-2 sm:p-3 lg:p-4 xl:p-5 flex flex-col lg:flex-row overflow-hidden">
@@ -62,7 +109,12 @@ export default function MonitorPage({ onNavigate }: MonitorPageProps) {
             {/* Left Column */}
             <div className="flex flex-col gap-2 sm:gap-3 lg:gap-4">
               {/* Sensor Controls */}
-              <SensorControls />
+              <SensorControls 
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                sensorStates={sensorStates}
+                setSensorStates={setSensorStates}
+              />
               
               {/* Charts Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 lg:gap-4 flex-1">
@@ -74,7 +126,13 @@ export default function MonitorPage({ onNavigate }: MonitorPageProps) {
             {/* Right Column */}
             <div className="flex flex-col gap-2 sm:gap-3 lg:gap-4">
               {/* Location Map */}
-              <LocationMap />
+              <LocationMap 
+                sensorId={activeTab}
+                latitude={currentState.latitude}
+                longitude={currentState.longitude}
+                mapView={currentState.mapView}
+                onMapViewChange={handleMapViewChange}
+              />
               
               {/* Alarm Status */}
               <AlarmStatus />
