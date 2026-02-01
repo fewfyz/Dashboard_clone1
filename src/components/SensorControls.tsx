@@ -2,6 +2,17 @@
 
 import React, { useState } from 'react';
 import { Lightbulb, DoorOpen, MapPin, Bell, Flame, Droplets, Plus, Minus } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+// Dynamically import the map component to avoid SSR issues
+const MapComponent = dynamic(() => import('./MapComponent'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50 flex items-center justify-center rounded-xl">
+      <div className="animate-pulse text-gray-400 text-xs">Loading map...</div>
+    </div>
+  ),
+});
 
 interface ToggleButtonProps {
   label: string;
@@ -98,17 +109,55 @@ function ValueControl({ label, value, unit, icon, onIncrease, onDecrease, isOn, 
 
 type SensorId = 'NO.1' | 'NO.2' | 'NO.3' | 'NO.4' | 'NO.5' | 'NO.6';
 
+interface SensorState {
+  light: boolean;
+  door: boolean;
+  guidingLamp: boolean;
+  alarm: boolean;
+  heaterOn: boolean;
+  heaterTemp: number;
+  dehumidifierOn: boolean;
+  humidity: number;
+  latitude: number;
+  longitude: number;
+  mapView: 'street' | 'satellite';
+}
+
 export default function SensorControls() {
   const [activeTab, setActiveTab] = useState<SensorId>('NO.2');
   
-  // Each sensor has its own state
-  const [sensorStates, setSensorStates] = useState({
-    'NO.1': { light: true, door: false, guidingLamp: false, alarm: false, heaterOn: true, heaterTemp: 25, dehumidifierOn: true, humidity: 40 },
-    'NO.2': { light: false, door: true, guidingLamp: false, alarm: false, heaterOn: true, heaterTemp: 25, dehumidifierOn: true, humidity: 40 },
-    'NO.3': { light: false, door: false, guidingLamp: true, alarm: false, heaterOn: false, heaterTemp: 20, dehumidifierOn: false, humidity: 50 },
-    'NO.4': { light: false, door: false, guidingLamp: false, alarm: true, heaterOn: true, heaterTemp: 30, dehumidifierOn: true, humidity: 35 },
-    'NO.5': { light: true, door: true, guidingLamp: false, alarm: false, heaterOn: false, heaterTemp: 22, dehumidifierOn: true, humidity: 45 },
-    'NO.6': { light: false, door: false, guidingLamp: false, alarm: false, heaterOn: true, heaterTemp: 28, dehumidifierOn: false, humidity: 55 },
+  // Each sensor has its own state including GPS coordinates
+  const [sensorStates, setSensorStates] = useState<Record<SensorId, SensorState>>({
+    'NO.1': { 
+      light: true, door: false, guidingLamp: false, alarm: false, 
+      heaterOn: true, heaterTemp: 25, dehumidifierOn: true, humidity: 40,
+      latitude: 14.4426, longitude: 101.3705, mapView: 'street'
+    },
+    'NO.2': { 
+      light: false, door: true, guidingLamp: false, alarm: false, 
+      heaterOn: true, heaterTemp: 25, dehumidifierOn: true, humidity: 40,
+      latitude: 14.4450, longitude: 101.3730, mapView: 'street'
+    },
+    'NO.3': { 
+      light: false, door: false, guidingLamp: true, alarm: false, 
+      heaterOn: false, heaterTemp: 20, dehumidifierOn: false, humidity: 50,
+      latitude: 14.4400, longitude: 101.3680, mapView: 'street'
+    },
+    'NO.4': { 
+      light: false, door: false, guidingLamp: false, alarm: true, 
+      heaterOn: true, heaterTemp: 30, dehumidifierOn: true, humidity: 35,
+      latitude: 14.4480, longitude: 101.3750, mapView: 'street'
+    },
+    'NO.5': { 
+      light: true, door: true, guidingLamp: false, alarm: false, 
+      heaterOn: false, heaterTemp: 22, dehumidifierOn: true, humidity: 45,
+      latitude: 14.4380, longitude: 101.3660, mapView: 'street'
+    },
+    'NO.6': { 
+      light: false, door: false, guidingLamp: false, alarm: false, 
+      heaterOn: true, heaterTemp: 28, dehumidifierOn: false, humidity: 55,
+      latitude: 14.4510, longitude: 101.3780, mapView: 'street'
+    },
   });
 
   // Get current sensor state
@@ -298,6 +347,53 @@ export default function SensorControls() {
               <Minus size={16} className="sm:w-[18px] sm:h-[18px] text-gray-600" />
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* Sensor Location Map */}
+      <div className="glass-card rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-5 mt-3 sm:mt-4 lg:mt-5">
+        <div className="flex items-center justify-between mb-2 sm:mb-3">
+          <div className="flex items-center gap-2">
+            <MapPin size={16} className="sm:w-[18px] sm:h-[18px] text-teal-500" />
+            <span className="text-[10px] sm:text-[11px] lg:text-xs font-medium text-gray-500 uppercase tracking-wide">
+              Sensor Location - {activeTab}
+            </span>
+          </div>
+          <div className="flex gap-1.5 sm:gap-2">
+            <button
+              onClick={() => updateSensorState('mapView', 'street')}
+              className={`min-h-[24px] sm:min-h-[28px] px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-lg text-[10px] sm:text-xs font-semibold transition-all duration-200
+                ${currentState.mapView === 'street' 
+                  ? 'bg-[#00b4b4] text-white shadow-sm' 
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+            >
+              <MapPin size={12} className="sm:w-3.5 sm:h-3.5 inline mr-1" />
+              Location
+            </button>
+            <button
+              onClick={() => updateSensorState('mapView', 'satellite')}
+              className={`min-h-[24px] sm:min-h-[28px] px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-lg text-[10px] sm:text-xs font-semibold transition-all duration-200
+                ${currentState.mapView === 'satellite' 
+                  ? 'bg-[#00b4b4] text-white shadow-sm' 
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+            >
+              🛰️ Geometry
+            </button>
+          </div>
+        </div>
+        <div className="relative w-full h-[300px] sm:h-[350px] lg:h-[400px] bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50 rounded-xl overflow-hidden shadow-inner">
+          <MapComponent
+            latitude={currentState.latitude}
+            longitude={currentState.longitude}
+            zoom={15}
+            markerTitle={`Sensor ${activeTab}`}
+            mapType={currentState.mapView}
+          />
+        </div>
+        <div className="mt-2 sm:mt-3 flex items-center justify-between text-[10px] sm:text-[11px] text-gray-500">
+          <span>Lat: {currentState.latitude.toFixed(4)}°</span>
+          <span>Lon: {currentState.longitude.toFixed(4)}°</span>
+          <span className="text-teal-600 font-semibold">📍 Active</span>
         </div>
       </div>
     </div>
