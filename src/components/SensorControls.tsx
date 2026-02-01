@@ -125,7 +125,7 @@ export default function SensorControls() {
     }));
   };
 
-  const tabs = ['NO.1', 'NO.2', 'NO.3', 'NO.4', 'NO.5', 'NO.6'];
+  const tabs: SensorId[] = ['NO.1', 'NO.2', 'NO.3', 'NO.4', 'NO.5', 'NO.6'];
 
   return (
     <div className="glass-card rounded-xl sm:rounded-2xl lg:rounded-3xl p-3 sm:p-4 lg:p-5 xl:p-6 animate-fade-in">
