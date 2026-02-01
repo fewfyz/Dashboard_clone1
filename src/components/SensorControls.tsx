@@ -3,6 +3,10 @@
 import React, { useState } from 'react';
 import { Lightbulb, DoorOpen, MapPin, Bell, Flame, Droplets, Plus, Minus } from 'lucide-react';
 
+interface SensorControlsProps {
+  onSensorClick?: (sensorNumber: string) => void;
+}
+
 interface ToggleButtonProps {
   label: string;
   icon: React.ReactNode;
@@ -96,7 +100,7 @@ function ValueControl({ label, value, unit, icon, onIncrease, onDecrease, isOn, 
   );
 }
 
-export default function SensorControls() {
+export default function SensorControls({ onSensorClick }: SensorControlsProps = {}) {
   const [activeTab, setActiveTab] = useState('NO.2');
   const [light, setLight] = useState(false);
   const [door, setDoor] = useState(true);
@@ -119,7 +123,12 @@ export default function SensorControls() {
             {tabs.map((tab) => (
               <button
                 key={tab}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => {
+                  setActiveTab(tab);
+                  if (onSensorClick) {
+                    onSensorClick(tab);
+                  }
+                }}
                 role="tab"
                 aria-selected={activeTab === tab}
                 className={`min-h-[28px] sm:min-h-[32px] px-2.5 sm:px-3 lg:px-4 py-1 sm:py-1.5 text-[10px] sm:text-xs font-semibold rounded-full transition-all duration-200

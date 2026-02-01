@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import Header from '@/components/Header';
 import SensorControls from '@/components/SensorControls';
+import SensorDetailPage from '@/components/SensorDetailPage';
 import LocationMap from '@/components/LocationMap';
 import AlarmStatus from '@/components/AlarmStatus';
 import MonitoringChart from '@/components/MonitoringChart';
@@ -16,6 +17,18 @@ interface MonitorPageProps {
 
 export default function MonitorPage({ onNavigate }: MonitorPageProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [selectedSensor, setSelectedSensor] = useState<string | null>(null);
+
+  // If a sensor is selected, show the detail page
+  if (selectedSensor) {
+    return (
+      <SensorDetailPage
+        sensorNumber={selectedSensor}
+        onBack={() => setSelectedSensor(null)}
+        onNavigate={onNavigate}
+      />
+    );
+  }
 
   return (
     <div className="h-screen w-full bg-gradient-to-br from-[#e8f4f4] to-[#d4ebeb] p-2 sm:p-3 lg:p-4 xl:p-5 flex flex-col lg:flex-row overflow-hidden">
@@ -62,7 +75,7 @@ export default function MonitorPage({ onNavigate }: MonitorPageProps) {
             {/* Left Column */}
             <div className="flex flex-col gap-2 sm:gap-3 lg:gap-4">
               {/* Sensor Controls */}
-              <SensorControls />
+              <SensorControls onSensorClick={(sensor) => setSelectedSensor(sensor)} />
               
               {/* Charts Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 lg:gap-4 flex-1">
