@@ -11,7 +11,6 @@ export default function Dashboard() {
           <span className="font-bold text-[#008080] text-lg">DASHBOARD</span>
         </div>
         <nav className="flex flex-col gap-3">
-          <button className="sidebar-btn">Dashboard</button>
           <button className="sidebar-btn">Home</button>
           <button className="sidebar-btn">Monitor</button>
           <button className="sidebar-btn">Analysis</button>
@@ -24,9 +23,9 @@ export default function Dashboard() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-6">
         {/* Top Bar */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-4">
           <div className="flex gap-2">
             {["NO.1", "NO.2", "NO.3", "NO.4", "NO.5", "NO.6"].map((tab, idx) => (
               <button
@@ -45,99 +44,109 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Main Grid */}
-        <div className="grid grid-cols-3 gap-6">
-          {/* Left Column */}
-          <div className="flex flex-col gap-6">
-            {/* Controls */}
-            <div className="glass-card p-6 rounded-2xl flex flex-col gap-4">
-              <div className="flex gap-4">
-                <div className="flex-1 flex flex-col items-center justify-center bg-[#00b4b4]/10 rounded-xl p-4">
-                  <span className="text-lg font-bold text-[#008080]">OFF</span>
-                  <span className="mt-2 text-gray-500">LIGHT</span>
-                </div>
-                <div className="flex-1 flex flex-col items-center justify-center bg-[#00b4b4]/10 rounded-xl p-4">
-                  <span className="text-lg font-bold text-[#00b4b4]">ON</span>
-                  <span className="mt-2 text-gray-500">DOOR</span>
-                </div>
-              </div>
-            </div>
-            {/* Alarm Status */}
-            <AlarmStatus />
+        {/* Top Controls Row */}
+        <div className="grid grid-cols-4 gap-4 mb-4">
+          <div className="bg-white rounded-2xl shadow p-6 flex flex-col items-center justify-center">
+            <span className="text-2xl font-bold text-[#00b4b4] mb-2">OFF</span>
+            <span className="text-gray-500">LIGHT</span>
           </div>
-
-          {/* Center Column */}
-          <div className="flex flex-col gap-6">
-            {/* Monitoring Chart */}
-            <div className="glass-card p-6 rounded-2xl" style={{ height: 320 }}>
-              <h3 className="font-semibold mb-4 text-[#00b4b4]">MONITORING</h3>
-              {/* Chart area with axis labels */}
-              <div className="relative h-[220px] w-full bg-white rounded-lg shadow flex items-end">
-                {/* Chart placeholder */}
-                <div className="absolute left-0 bottom-0 ml-4 mb-2 text-xs text-gray-500">Mon</div>
-                <div className="absolute left-[16%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Tue</div>
-                <div className="absolute left-[32%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Wed</div>
-                <div className="absolute left-[48%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Thu</div>
-                <div className="absolute left-[64%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Fri</div>
-                <div className="absolute left-[80%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Sat</div>
-                <div className="absolute right-0 bottom-0 mr-4 mb-2 text-xs text-gray-500">Sun</div>
-                {/* Y-axis labels */}
-                <div className="absolute left-0 top-0 ml-2 mt-2 text-xs text-gray-500">900</div>
-                <div className="absolute left-0 top-[25%] ml-2 text-xs text-gray-500">700</div>
-                <div className="absolute left-0 top-[50%] ml-2 text-xs text-gray-500">500</div>
-                <div className="absolute left-0 top-[75%] ml-2 text-xs text-gray-500">300</div>
-                <div className="absolute left-0 bottom-0 ml-2 mb-2 text-xs text-gray-500">100</div>
-              </div>
+          <div className="bg-white rounded-2xl shadow p-6 flex flex-col items-center justify-center">
+            <span className="text-2xl font-bold text-[#00b4b4] mb-2">ON</span>
+            <span className="text-gray-500">DOOR</span>
+          </div>
+          <div className="bg-white rounded-2xl shadow p-6 flex flex-col items-center justify-center">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-[#00b4b4] font-semibold">HEATER</span>
+              <span className="bg-[#00b4b4] text-white px-2 py-1 rounded-full text-xs">ON</span>
             </div>
-            {/* Equipment Status */}
-            <div className="glass-card p-6 rounded-2xl flex gap-4">
-              <div className="flex-1 flex flex-col items-center justify-center bg-[#6366f1]/10 rounded-xl p-4">
-                <span className="font-bold text-[#6366f1]">NO.3</span>
-                <span className="mt-2 text-[#6366f1] font-semibold">DRY</span>
-              </div>
-              <div className="flex-1 flex flex-col items-center justify-center bg-[#f97316]/10 rounded-xl p-4">
-                <span className="font-bold text-[#f97316]">NO.4</span>
-                <span className="mt-2 text-[#f97316] font-semibold">OPEN</span>
-              </div>
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-bold text-[#00b4b4]">25℃</span>
+              <button className="bg-gray-100 rounded-full px-2">+</button>
+              <button className="bg-gray-100 rounded-full px-2">-</button>
             </div>
           </div>
-
-          {/* Right Column */}
-          <div className="flex flex-col gap-6">
-            {/* Controls */}
-            <div className="glass-card p-6 rounded-2xl flex flex-col gap-4">
-              <div className="flex justify-between items-center">
-                <span className="font-semibold text-[#00b4b4]">HEATER</span>
-                <button className="toggle-btn">ON</button>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="font-semibold text-[#00b4b4]">DEHUMIDIFIER</span>
-                <button className="toggle-btn">ON</button>
-              </div>
+          <div className="bg-white rounded-2xl shadow p-6 flex flex-col items-center justify-center">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-[#00b4b4] font-semibold">DEHUMIDIFIER</span>
+              <span className="bg-[#00b4b4] text-white px-2 py-1 rounded-full text-xs">ON</span>
             </div>
-            {/* Early Warning */}
-            <div className="glass-card p-6 rounded-2xl">
-              <h3 className="font-semibold mb-4 text-[#00b4b4]">EARLY WARNING</h3>
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-bold text-[#00b4b4]">40%</span>
+              <button className="bg-gray-100 rounded-full px-2">+</button>
+              <button className="bg-gray-100 rounded-full px-2">-</button>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Charts Row */}
+        <div className="grid grid-cols-3 gap-4 mb-4">
+          <div className="col-span-2 bg-white rounded-2xl shadow p-4 flex flex-col">
+            <h3 className="text-[#00b4b4] font-semibold mb-2">MONITORING</h3>
+            <div className="relative h-[260px] w-full bg-white rounded-lg shadow flex items-end">
+              {/* Chart placeholder */}
+              <div className="absolute left-0 bottom-0 ml-4 mb-2 text-xs text-gray-500">Mon</div>
+              <div className="absolute left-[16%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Tue</div>
+              <div className="absolute left-[32%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Wed</div>
+              <div className="absolute left-[48%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Thu</div>
+              <div className="absolute left-[64%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Fri</div>
+              <div className="absolute left-[80%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Sat</div>
+              <div className="absolute right-0 bottom-0 mr-4 mb-2 text-xs text-gray-500">Sun</div>
+              {/* Y-axis labels */}
+              <div className="absolute left-0 top-0 ml-2 mt-2 text-xs text-gray-500">900</div>
+              <div className="absolute left-0 top-[25%] ml-2 text-xs text-gray-500">700</div>
+              <div className="absolute left-0 top-[50%] ml-2 text-xs text-gray-500">500</div>
+              <div className="absolute left-0 top-[75%] ml-2 text-xs text-gray-500">300</div>
+              <div className="absolute left-0 bottom-0 ml-2 mb-2 text-xs text-gray-500">100</div>
+            </div>
+          </div>
+          <div className="bg-white rounded-2xl shadow p-4 flex flex-col">
+            <h3 className="text-[#00b4b4] font-semibold mb-2">EARLY WARNING</h3>
+            <div className="flex-1 flex flex-col items-center justify-center">
+              {/* Early warning chart placeholder */}
+              <div className="w-40 h-40 bg-[#e0f7fa] rounded-full flex items-center justify-center relative">
+                <span className="absolute top-8 left-1/2 -translate-x-1/2 bg-white px-2 py-1 rounded-full text-[#00b4b4] font-bold shadow">25℃</span>
+                <span className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-white px-2 py-1 rounded-full text-[#00b4b4] font-bold shadow">53%</span>
+              </div>
               <div className="flex gap-4 mt-4">
                 <div className="bg-[#f97316]/10 rounded-xl px-4 py-2 text-[#f97316] font-semibold">OPEN</div>
                 <div className="bg-[#6366f1]/10 rounded-xl px-4 py-2 text-[#6366f1] font-semibold">DRY</div>
                 <div className="bg-[#ef4444]/10 rounded-xl px-4 py-2 text-[#ef4444] font-semibold">HOT</div>
               </div>
             </div>
-            {/* All Status */}
-            <div className="glass-card p-6 rounded-2xl">
-              <h3 className="font-semibold mb-4 text-[#00b4b4]">ALL</h3>
-              <div className="flex flex-col gap-3">
-                <div className="flex items-center justify-between bg-white/80 rounded-xl p-3">
-                  <span className="font-bold text-[#008080]">NO.1</span>
-                  <span className="text-gray-600">63% 26°C</span>
-                  <span className="bg-[#f97316] text-white px-3 py-1 rounded-full font-semibold">OPEN</span>
-                </div>
-                <div className="flex items-center justify-between bg-white/80 rounded-xl p-3">
-                  <span className="font-bold text-[#008080]">NO.2</span>
-                  <span className="text-gray-600">43% 28°C</span>
-                  <span className="bg-[#00b4b4] text-white px-3 py-1 rounded-full font-semibold">NORMAL</span>
-                </div>
+          </div>
+        </div>
+
+        {/* Bottom Row */}
+        <div className="grid grid-cols-3 gap-4">
+          <div className="bg-white rounded-2xl shadow p-6 flex flex-col items-center justify-center">
+            <div className="flex gap-8">
+              <div className="flex flex-col items-center">
+                <span className="text-[#6366f1] font-bold text-lg mb-2">NO.3</span>
+                <span className="bg-[#6366f1]/10 text-[#6366f1] font-semibold px-6 py-2 rounded-xl">DRY</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-[#f97316] font-bold text-lg mb-2">NO.4</span>
+                <span className="bg-[#f97316]/10 text-[#f97316] font-semibold px-6 py-2 rounded-xl">OPEN</span>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white rounded-2xl shadow p-6 flex flex-col">
+            <h3 className="text-[#00b4b4] font-semibold mb-2">EQUIPMENT</h3>
+            {/* Equipment chart placeholder */}
+            <div className="h-32 w-full bg-[#e0f7fa] rounded-lg mt-2"></div>
+          </div>
+          <div className="bg-white rounded-2xl shadow p-6 flex flex-col">
+            <h3 className="text-[#00b4b4] font-semibold mb-2">ALL</h3>
+            <div className="flex flex-col gap-3 mt-2">
+              <div className="flex items-center justify-between bg-white/80 rounded-xl p-3">
+                <span className="font-bold text-[#008080]">NO.1</span>
+                <span className="text-gray-600">63% 26°C</span>
+                <span className="bg-[#f97316] text-white px-3 py-1 rounded-full font-semibold">OPEN</span>
+              </div>
+              <div className="flex items-center justify-between bg-white/80 rounded-xl p-3">
+                <span className="font-bold text-[#008080]">NO.2</span>
+                <span className="text-gray-600">43% 28°C</span>
+                <span className="bg-[#00b4b4] text-white px-3 py-1 rounded-full font-semibold">NORMAL</span>
               </div>
             </div>
           </div>
