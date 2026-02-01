@@ -12,27 +12,27 @@ interface ToggleButtonProps {
 
 function ToggleButton({ label, icon, isOn, onToggle }: ToggleButtonProps) {
   return (
-    <div className="flex flex-col items-center gap-1.5 sm:gap-2 lg:gap-3">
-      <span className="text-[9px] sm:text-[10px] lg:text-[11px] xl:text-xs font-medium text-gray-500 uppercase tracking-wide">{label}</span>
-      <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3">
-        <span className={`text-[9px] sm:text-[10px] lg:text-[11px] xl:text-xs font-semibold transition-colors ${!isOn ? 'text-gray-700' : 'text-gray-400'}`}>OFF</span>
+    <div className="flex flex-col items-center gap-2 sm:gap-2.5">
+      <span className="text-[10px] sm:text-[11px] lg:text-xs font-semibold text-gray-600 uppercase tracking-wide">{label}</span>
+      <div className="flex items-center gap-2 sm:gap-2.5">
+        <span className={`text-[10px] sm:text-[11px] font-semibold transition-colors ${!isOn ? 'text-gray-700' : 'text-gray-400'}`}>OFF</span>
         <button
           onClick={onToggle}
-          className={`relative w-[42px] h-[26px] sm:w-[48px] sm:h-[28px] lg:w-[51px] lg:h-[31px] rounded-full transition-all duration-300 ease-out
-            ${isOn ? 'bg-[#00b4b4]' : 'bg-gray-300'}
+          className={`relative w-[44px] h-[26px] sm:w-[50px] sm:h-[30px] rounded-full transition-all duration-300 shadow-inner
+            ${isOn ? 'bg-gradient-to-r from-[#00b4b4] to-[#009999]' : 'bg-gray-300'}
             focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00b4b4] focus-visible:ring-offset-2`}
           role="switch"
           aria-checked={isOn}
           aria-label={`${label} toggle`}
         >
-          <div className={`absolute top-[2px] w-[22px] h-[22px] sm:w-[24px] sm:h-[24px] lg:w-[27px] lg:h-[27px] bg-white rounded-full shadow-lg 
-            transition-transform duration-300 ease-out
-            ${isOn ? 'translate-x-[18px] sm:translate-x-[22px] lg:translate-x-[22px]' : 'translate-x-[2px]'}`}
+          <div className={`absolute top-[2px] w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] bg-white rounded-full shadow-lg 
+            transition-all duration-300 ease-out
+            ${isOn ? 'translate-x-[20px] sm:translate-x-[22px]' : 'translate-x-[2px]'}`}
           />
         </button>
-        <div className={`w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 xl:w-10 xl:h-10 rounded-full flex items-center justify-center transition-all duration-200
+        <div className={`w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-xl flex items-center justify-center transition-all duration-200 shadow-sm
           ${isOn 
-            ? 'bg-[#00b4b4] text-white' 
+            ? 'bg-gradient-to-br from-[#00b4b4] to-[#009999] text-white shadow-teal-500/25' 
             : 'bg-gray-100 text-gray-500'}`}>
           {icon}
         </div>
@@ -54,15 +54,15 @@ interface ValueControlProps {
 
 function ValueControl({ label, value, unit, icon, onIncrease, onDecrease, isOn, onToggle }: ValueControlProps) {
   return (
-    <div className="glass-card rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-5">
+    <div className="glass-card rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-5 transition-all hover:shadow-xl">
       <div className="flex items-center justify-between mb-2 sm:mb-3">
-        <span className="text-[10px] sm:text-[11px] lg:text-xs font-medium text-gray-500 uppercase tracking-wide">{label}</span>
+        <span className="text-[11px] sm:text-xs font-semibold text-gray-600 uppercase tracking-wide">{label}</span>
         <button
           onClick={onToggle}
-          className={`min-h-[28px] sm:min-h-[32px] px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-semibold transition-all duration-200
+          className={`min-h-[30px] sm:min-h-[34px] px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-sm transition-all duration-200
             ${isOn 
-              ? 'bg-[#00b4b4] text-white' 
-              : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}
+              ? 'bg-gradient-to-r from-[#00b4b4] to-[#009999] text-white shadow-teal-500/25' 
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
         >
           {isOn ? 'ON' : 'OFF'}
         </button>

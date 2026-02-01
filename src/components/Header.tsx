@@ -30,51 +30,51 @@ export default function Header() {
   };
 
   return (
-    <header className="flex flex-wrap items-center justify-center sm:justify-end gap-2 sm:gap-3 lg:gap-4 xl:gap-5 py-2 sm:py-3 lg:py-4 px-2 sm:px-4 lg:px-6">
+    <header className="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-4 lg:gap-5 py-3 sm:py-4 lg:py-5 px-2 sm:px-4 lg:px-6">
       {/* Time */}
-      <div className="flex items-center gap-1.5 sm:gap-2">
-        <span className="text-gray-800 font-semibold text-sm sm:text-base lg:text-lg tracking-tight">
+      <div className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-teal-100/50 shadow-sm">
+        <span className="text-gray-800 font-semibold text-sm sm:text-base lg:text-lg tracking-tight tabular-nums">
           {formatTime(currentTime)}
         </span>
       </div>
       
       {/* Date */}
-      <div className="text-gray-500 text-xs sm:text-sm lg:text-base font-medium">
+      <div className="text-gray-500 text-xs sm:text-sm lg:text-base font-medium tracking-wide tabular-nums">
         {formatDate(currentTime)}
       </div>
       
       {/* Divider */}
-      <div className="hidden sm:block w-px h-5 lg:h-6 bg-gray-300"></div>
+      <div className="hidden sm:block w-px h-6 bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
       
       {/* Humidity */}
-      <div className="flex items-center gap-1 sm:gap-1.5 text-gray-600">
-        <div className="p-1 sm:p-1.5 bg-[#e8f4f4] rounded-md sm:rounded-lg">
-          <Droplets size={14} className="sm:w-4 sm:h-4 text-[#00b4b4]" />
+      <div className="flex items-center gap-2 px-3 py-2 bg-white/80 backdrop-blur-sm rounded-xl border border-teal-100/50 shadow-sm transition-all hover:shadow-md">
+        <div className="p-1.5 bg-gradient-to-br from-teal-50 to-cyan-100 rounded-lg">
+          <Droplets size={16} className="text-[#00b4b4]" />
         </div>
-        <span className="text-xs sm:text-sm font-medium">63%</span>
+        <span className="text-sm font-semibold text-gray-700 tabular-nums">63%</span>
       </div>
       
       {/* Temperature */}
-      <div className="flex items-center gap-1 sm:gap-1.5 text-gray-600">
-        <div className="p-1 sm:p-1.5 bg-orange-50 rounded-md sm:rounded-lg">
-          <Thermometer size={14} className="sm:w-4 sm:h-4 text-orange-400" />
+      <div className="flex items-center gap-2 px-3 py-2 bg-white/80 backdrop-blur-sm rounded-xl border border-orange-100/50 shadow-sm transition-all hover:shadow-md">
+        <div className="p-1.5 bg-gradient-to-br from-orange-50 to-amber-100 rounded-lg">
+          <Thermometer size={16} className="text-orange-500" />
         </div>
-        <span className="text-xs sm:text-sm font-medium">26°C</span>
+        <span className="text-sm font-semibold text-gray-700 tabular-nums">26°C</span>
       </div>
       
       {/* Dark Mode Toggle (iOS Style) */}
       <button
         onClick={() => setIsDarkMode(!isDarkMode)}
-        className={`relative w-11 h-6 sm:w-14 sm:h-8 rounded-full transition-colors duration-300 ${
-          isDarkMode ? 'bg-teal-500' : 'bg-gray-300'
+        className={`relative w-12 h-7 rounded-full transition-all duration-300 shadow-inner ${
+          isDarkMode ? 'bg-gradient-to-r from-teal-500 to-cyan-500' : 'bg-gray-300'
         }`}
         role="switch"
         aria-checked={isDarkMode}
         aria-label="Toggle dark mode"
       >
         <div 
-          className={`absolute top-0.5 sm:top-1 w-5 h-5 sm:w-6 sm:h-6 bg-white rounded-full shadow-md transition-transform duration-300 ${
-            isDarkMode ? 'translate-x-5 sm:translate-x-7' : 'translate-x-0.5 sm:translate-x-1'
+          className={`absolute top-0.5 w-6 h-6 bg-white rounded-full shadow-lg transition-all duration-300 ${
+            isDarkMode ? 'translate-x-5' : 'translate-x-0.5'
           }`}
         />
       </button>
