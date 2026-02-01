@@ -11,6 +11,7 @@ export default function Dashboard() {
           <span className="font-bold text-[#008080] text-lg">DASHBOARD</span>
         </div>
         <nav className="flex flex-col gap-3">
+          <button className="sidebar-btn">Dashboard</button>
           <button className="sidebar-btn">Home</button>
           <button className="sidebar-btn">Monitor</button>
           <button className="sidebar-btn">Analysis</button>
