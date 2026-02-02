@@ -138,38 +138,49 @@ export default function Dashboard() {
             </div>
           </div>
           {/* Charts Row */}
-          <div className="grid grid-cols-2 gap-6 mb-6">
-            <div className="bg-white rounded-2xl shadow p-6 flex flex-col">
-              <h3 className="text-[#00b4b4] font-semibold mb-2">MONITORING</h3>
-              <div className="relative h-[300px] w-full bg-white rounded-lg shadow flex items-end">
-                {/* Chart placeholder */}
-                <div className="absolute left-0 bottom-0 ml-4 mb-2 text-xs text-gray-500">Mon</div>
-                <div className="absolute left-[16%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Tue</div>
-                <div className="absolute left-[32%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Wed</div>
-                <div className="absolute left-[48%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Thu</div>
-                <div className="absolute left-[64%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Fri</div>
-                <div className="absolute left-[80%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Sat</div>
-                <div className="absolute right-0 bottom-0 mr-4 mb-2 text-xs text-gray-500">Sun</div>
-                {/* Y-axis labels */}
-                <div className="absolute left-0 top-0 ml-2 mt-2 text-xs text-gray-500">500</div>
-                <div className="absolute left-0 top-[25%] ml-2 text-xs text-gray-500">400</div>
-                <div className="absolute left-0 top-[50%] ml-2 text-xs text-gray-500">300</div>
-                <div className="absolute left-0 top-[75%] ml-2 text-xs text-gray-500">200</div>
-                <div className="absolute left-0 bottom-0 ml-2 mb-2 text-xs text-gray-500">100</div>
+          <div className="grid grid-cols-3 gap-6 mb-6">
+            <div className="col-span-2 bg-white rounded-2xl shadow p-6 flex flex-col">
+              <h3 className="text-[#00b4b4] font-semibold mb-4">MONITORING</h3>
+              <div className="relative h-[320px] w-full bg-white rounded-lg border border-gray-100 p-4">
+                {/* Chart area with proper padding for axis labels */}
+                <div className="absolute left-12 right-4 top-4 bottom-10 border-l border-b border-gray-200">
+                  {/* Chart content goes here */}
+                </div>
+                
+                {/* X-axis labels - positioned below the chart */}
+                <div className="absolute left-12 bottom-2 right-4 flex justify-between text-xs text-gray-500">
+                  <span>Mon</span>
+                  <span>Tue</span>
+                  <span>Wed</span>
+                  <span>Thu</span>
+                  <span>Fri</span>
+                  <span>Sat</span>
+                  <span>Sun</span>
+                </div>
+                
+                {/* Y-axis labels - positioned to the left of the chart */}
+                <div className="absolute left-0 top-4 bottom-10 flex flex-col justify-between text-xs text-gray-500 w-10 text-right pr-2">
+                  <span>500</span>
+                  <span>400</span>
+                  <span>300</span>
+                  <span>200</span>
+                  <span>100</span>
+                  <span>0</span>
+                </div>
               </div>
             </div>
             <div className="bg-white rounded-2xl shadow p-6 flex flex-col">
-              <h3 className="text-[#00b4b4] font-semibold mb-2">EARLY WARNING</h3>
+              <h3 className="text-[#00b4b4] font-semibold mb-4">EARLY WARNING</h3>
               <div className="flex-1 flex flex-col items-center justify-center">
                 {/* Early warning chart placeholder */}
-                <div className="w-44 h-44 bg-[#e0f7fa] rounded-full flex items-center justify-center relative">
-                  <span className="absolute top-10 left-1/2 -translate-x-1/2 bg-white px-2 py-1 rounded-full text-[#00b4b4] font-bold shadow">25℃</span>
-                  <span className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-white px-2 py-1 rounded-full text-[#00b4b4] font-bold shadow">53%</span>
+                <div className="w-36 h-36 bg-[#e0f7fa] rounded-full flex items-center justify-center relative">
+                  <span className="absolute top-8 left-1/2 -translate-x-1/2 bg-white px-2 py-1 rounded-full text-[#00b4b4] font-bold shadow text-sm">25℃</span>
+                  <span className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-white px-2 py-1 rounded-full text-[#00b4b4] font-bold shadow text-sm">53%</span>
                 </div>
-                <div className="flex gap-4 mt-4">
-                  <div className="bg-[#f97316]/10 rounded-xl px-4 py-2 text-[#f97316] font-semibold">OPEN</div>
-                  <div className="bg-[#6366f1]/10 rounded-xl px-4 py-2 text-[#6366f1] font-semibold">DRY</div>
-                  <div className="bg-[#ef4444]/10 rounded-xl px-4 py-2 text-[#ef4444] font-semibold">HOT</div>
+                <div className="flex gap-3 mt-4">
+                  <div className="bg-[#f97316]/10 rounded-xl px-3 py-1.5 text-[#f97316] font-semibold text-sm">OPEN</div>
+                  <div className="bg-[#6366f1]/10 rounded-xl px-3 py-1.5 text-[#6366f1] font-semibold text-sm">DRY</div>
+                  <div className="bg-[#ef4444]/10 rounded-xl px-3 py-1.5 text-[#ef4444] font-semibold text-sm">HOT</div>
                 </div>
               </div>
             </div>
