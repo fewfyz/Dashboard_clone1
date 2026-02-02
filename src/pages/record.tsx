@@ -104,19 +104,20 @@ export default function RecordPage() {
             <h3 className="text-[#00b4b4] font-semibold mb-2">MONITORING</h3>
             <div className="relative h-[260px] w-full bg-white rounded-lg shadow flex items-end">
               {/* Chart placeholder */}
-              <div className="absolute left-0 bottom-0 ml-4 mb-2 text-xs text-gray-500">Mon</div>
-              <div className="absolute left-[16%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Tue</div>
-              <div className="absolute left-[32%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Wed</div>
-              <div className="absolute left-[48%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Thu</div>
-              <div className="absolute left-[64%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Fri</div>
-              <div className="absolute left-[80%] bottom-0 ml-4 mb-2 text-xs text-gray-500">Sat</div>
-              <div className="absolute right-0 bottom-0 mr-4 mb-2 text-xs text-gray-500">Sun</div>
-              {/* Y-axis labels */}
-              <div className="absolute left-0 top-0 ml-2 mt-2 text-xs text-gray-500">900</div>
-              <div className="absolute left-0 top-[25%] ml-2 text-xs text-gray-500">700</div>
-              <div className="absolute left-0 top-[50%] ml-2 text-xs text-gray-500">500</div>
-              <div className="absolute left-0 top-[75%] ml-2 text-xs text-gray-500">300</div>
-              <div className="absolute left-0 bottom-0 ml-2 mb-2 text-xs text-gray-500">100</div>
+              {/* Y-axis labels, spaced with more left margin */}
+              <div className="absolute left-4 top-4 text-xs text-gray-500">500</div>
+              <div className="absolute left-4" style={{top: '25%'}}><span className="text-xs text-gray-500">400</span></div>
+              <div className="absolute left-4" style={{top: '50%'}}><span className="text-xs text-gray-500">300</span></div>
+              <div className="absolute left-4" style={{top: '75%'}}><span className="text-xs text-gray-500">200</span></div>
+              <div className="absolute left-4 bottom-4 text-xs text-gray-500">100</div>
+              {/* X-axis labels, spaced with more bottom margin and right offset */}
+              <div className="absolute bottom-2 left-12 text-xs text-gray-500">Mon</div>
+              <div className="absolute bottom-2 left-1/5 text-xs text-gray-500">Tue</div>
+              <div className="absolute bottom-2 left-2/5 text-xs text-gray-500">Wed</div>
+              <div className="absolute bottom-2 left-3/5 text-xs text-gray-500">Thu</div>
+              <div className="absolute bottom-2 left-4/5 text-xs text-gray-500">Fri</div>
+              <div className="absolute bottom-2 right-20 text-xs text-gray-500">Sat</div>
+              <div className="absolute bottom-2 right-4 text-xs text-gray-500">Sun</div>
             </div>
           </div>
           <div className="bg-white rounded-2xl shadow p-4 flex flex-col">
