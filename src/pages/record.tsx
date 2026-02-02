@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import '../styles/record.css';
 
 const menuList = [
   { name: 'Home', icon: '🏠', href: '/' },
@@ -9,8 +10,10 @@ const menuList = [
 ];
 
 export default function RecordPage() {
+  const [recordMode, setRecordMode] = useState(true);
+
   return (
-    <div className="flex min-h-screen bg-[#e0f7fa]">
+    <div className={`flex min-h-screen bg-[#e0f7fa] ${recordMode ? 'record-mode' : ''}`}>
       {/* Sidebar */}
       <aside className="w-64 bg-white/60 rounded-r-3xl p-6 flex flex-col gap-6 shadow-lg">
         <div className="mb-8 flex items-center gap-2">
@@ -20,7 +23,7 @@ export default function RecordPage() {
         <nav className="flex flex-col gap-3">
           {menuList.map(menu => (
             <Link href={menu.href} key={menu.name} legacyBehavior>
-              <a className={`sidebar-btn flex items-center gap-2 px-4 py-3 rounded-xl text-left font-semibold ${menu.name === 'Record' ? 'bg-[#00b4b4] text-white' : 'bg-white/80 text-[#008080]'}`}>
+              <a className={`sidebar-btn ${menu.name === 'Record' ? 'active' : 'normal'} flex items-center gap-2 px-4 py-3 rounded-xl text-left font-semibold`}>
                 <span>{menu.icon}</span>
                 {menu.name}
               </a>
@@ -34,7 +37,13 @@ export default function RecordPage() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-6">
+      <main className="flex-1 p-6 record-dashboard">
+        {/* Toggle for Record mode (applies styles from test_dashboard.txt via record.css) */}
+        <div className="mb-4 flex items-center gap-4">
+          <button onClick={() => setRecordMode(m => !m)} className="px-4 py-2 rounded bg-[#007C84] text-white">Toggle Record View</button>
+          <span className="text-sm text-gray-600">Record mode is {recordMode ? 'ON' : 'OFF'}</span>
+        </div>
+
         {/* Top Bar */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex gap-2">

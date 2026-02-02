@@ -1,0 +1,68 @@
+/* record.css
+   Styles adapted from test_dashboard.txt (visual layout for Record view).
+   Applied when the root .record-mode class is present.
+*/
+.record-mode {
+  background: #F5FAFA !important;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.record-mode > main {
+  background: transparent;
+}
+
+/* Container visual (card) */
+.record-mode .record-dashboard {
+  position: relative;
+  width: 100%;
+  max-width: 2050px;
+  margin: 0 auto;
+  height: 1245px;
+  background: #F5FAFA;
+  box-shadow: 0px 20px 40px rgba(0,0,0,0.1);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* Sidebar adjustments to match design */
+.record-mode aside {
+  background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.6));
+  backdrop-filter: blur(6px);
+  border-right: 1px solid rgba(0,0,0,0.02);
+  box-shadow: 5px 0 30px rgba(0,118,135,0.03) inset;
+}
+
+.record-mode .sidebar-btn {
+  transition: all 200ms ease;
+}
+
+/* Small utility tweaks: use simple classes instead of escaping Tailwind-like names */
+.record-mode .sidebar-btn.normal {
+  background: rgba(255, 255, 255, 0.8) !important;
+  color: #007C84 !important;
+}
+.record-mode .sidebar-btn.active {
+  background: #007C84 !important;
+  color: #ffffff !important;
+}
+
+/* Cards overlay style from test_dashboard.txt Overlay blocks */
+.record-mode .rounded-2xl, .record-mode .rounded-lg {
+  background: linear-gradient(95.73deg, rgba(0,118,135,0.08) 0.9%, rgba(0,118,135,0.06) 52.54%, rgba(0,118,135,0.02) 99.06%), rgba(235,240,241,0.4);
+  box-shadow: 5.976px 5.976px 14.94px rgba(0,118,135,0.05), -5.976px -5.976px 19.422px rgba(255,255,255,0.5), 8.964px 8.964px 59.76px rgba(0,118,135,0.1);
+}
+
+/* Early warning donut background */
+.record-mode .w-40.h-40 {
+  background: linear-gradient(95.73deg, rgba(0,118,135,0.02), rgba(235,240,241,0.3));
+  box-shadow: 5px 5px 14px rgba(0,118,135,0.05);
+}
+
+/* Respect the test_dashboard.txt font choices where possible */
+.record-mode, .record-mode * { font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+
+/* Small responsive fix for narrower viewports */
+@media (max-width: 1200px) {
+  .record-mode .record-dashboard { height: auto; }
+}
