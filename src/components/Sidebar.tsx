@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Home, Monitor, BarChart3, FileText, Settings, HelpCircle, ChevronRight } from 'lucide-react';
+import { Home, Monitor, BarChart3, FileText, Settings, HelpCircle, ChevronRight, Activity } from 'lucide-react';
 
 interface SidebarProps {
   activeItem: string;
@@ -11,6 +11,7 @@ interface SidebarProps {
 const menuItems = [
   { id: 'home', label: 'Home', icon: Home },
   { id: 'monitor', label: 'Monitor', icon: Monitor },
+  { id: 'device-status', label: 'Device Status', icon: Activity },
   { id: 'analysis', label: 'Analysis', icon: BarChart3 },
   { id: 'record', label: 'Record', icon: FileText },
 ];
