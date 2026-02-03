@@ -7,6 +7,7 @@ import StorageBox from '@/components/StorageBox';
 import CaseSection from '@/components/CaseSection';
 import MonitorPage from '@/components/MonitorPage';
 import AnalysisPage from '@/components/AnalysisPage';
+import DeviceStatusPage from '@/components/DeviceStatusPage';
 
 // Mock data for Storage Box 1
 const storageBox1Data = {
@@ -74,6 +75,11 @@ const case01Data = {
 export default function Dashboard() {
   const [currentPage, setCurrentPage] = useState('home');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Render Device Status page
+  if (currentPage === 'device-status') {
+    return <DeviceStatusPage onNavigate={setCurrentPage} />;
+  }
 
   // Render Monitor page
   if (currentPage === 'monitor') {
