@@ -60,7 +60,7 @@ export default function DeviceStatusPage({ onNavigate }: DeviceStatusPageProps) 
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={sidebarOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
         </svg>
       </button>
-      <aside className={\`\${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 fixed lg:relative z-40 transition-transform duration-300 ease-out\`}>
+      <aside className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 fixed lg:relative z-40 transition-transform duration-300 ease-out`}>
         <Sidebar activeItem="device-status" onItemClick={(item) => { onNavigate(item); setSidebarOpen(false); }} />
       </aside>
       {sidebarOpen && (<div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-30 lg:hidden animate-fade-in" onClick={() => setSidebarOpen(false)} aria-hidden="true" />)}
@@ -119,12 +119,12 @@ export default function DeviceStatusPage({ onNavigate }: DeviceStatusPageProps) 
                       <td className="py-4 px-4 text-sm text-gray-300">{device.energyConsumption.toFixed(2)}</td>
                       <td className="py-4 px-4 text-sm text-gray-300">{device.power.toFixed(2)}</td>
                       <td className="py-4 px-4">
-                        <span className={\`inline-flex items-center gap-1 text-xs font-medium \${device.operate === 'Using' ? 'text-red-400' : 'text-gray-400'}\`}>
+                        <span className={`inline-flex items-center gap-1 text-xs font-medium ${device.operate === 'Using' ? 'text-red-400' : 'text-gray-400'}`}>
                           <span className="text-red-400">▶▶</span> {device.operate}
                         </span>
                       </td>
                       <td className="py-4 px-4">
-                        <span className={\`inline-flex items-center gap-1.5 text-xs font-medium \${device.status === 'online' ? 'text-green-400' : 'text-red-400'}\`}>
+                        <span className={`inline-flex items-center gap-1.5 text-xs font-medium ${device.status === 'online' ? 'text-green-400' : 'text-red-400'}`}>
                           <Wifi size={14} />{device.status}
                         </span>
                       </td>
